@@ -7,8 +7,8 @@ const routes: Routes = [
     pathMatch:'full'
   },
   {
-    // path:'/login',
-    // loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    path:'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   }
 ];
 
