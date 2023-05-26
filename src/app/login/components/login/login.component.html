@@ -5,8 +5,14 @@
         </div>
         <div class="login-box">
             <form class="form-box">
-                <input type="text" placeholder="E-mail">
-                <input type="password" placeholder="Senha">
+                <mat-form-field class="full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="E-mail" required>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput formControlName="Senha" type="password" required>
+                </mat-form-field>
                 <button class="bt-login">Login</button>
             </form>
             <p><a class="forgot-text" href="">Esqueci a senha</a></p>
