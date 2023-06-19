@@ -5,11 +5,11 @@ const routes: Routes = [
   {
     path:'',
     pathMatch:'full',
-    redirectTo:'login'
+    redirectTo:'condomanager/sistema'
   },
   {
-    path:'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    path:'condomanager/sistema',
+    loadChildren: () => import('./condomanager/sistema/sistema.module').then(m => m.SistemaModule)
   }
 ];
 
