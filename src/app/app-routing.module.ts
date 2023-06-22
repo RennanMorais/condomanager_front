@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path:'',
     pathMatch:'full',
-    redirectTo:'login'
+    redirectTo:'condomanager/sistema'
   },
   {
     path:'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./condomanager/sistema/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path:'condomanager/sistema',
+    //canActivate: [AuthGuard],
+    loadChildren: () => import('./condomanager/sistema/sistema.module').then(m => m.SistemaModule)
   }
 ];
 
