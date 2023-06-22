@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CondominioComponent implements OnInit {
 
+  listaNomes: string[]  = ["Nome1", 'Nome2', 'Nome3', 'Nome4'];
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

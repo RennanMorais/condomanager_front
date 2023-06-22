@@ -1,21 +1,21 @@
-<div class="container">
+<div class="back">
     <div class="login">
-        <div class="logo-box">
-            <img src="https://i0.wp.com/posletrasufac.com/wp-content/uploads/2019/07/logo-teste.png?fit=1121%2C584&ssl=1&w=640" width="200px">
-        </div>
+        <h1 class="d-flex justify-content-center ms-5">CONDOMANAGER LOGO</h1>
         <div class="login-box">
-            <form class="form-box">
-                <mat-form-field class="full-width">
-                    <mat-label>E-mail</mat-label>
-                    <input matInput formControlName="E-mail" required>
-                </mat-form-field>
-                <mat-form-field class="full-width">
-                    <mat-label>E-mail</mat-label>
-                    <input matInput formControlName="Senha" type="password" required>
-                </mat-form-field>
-                <button class="bt-login">Login</button>
+            <form>
+              <div class="mb-3">
+                <label for="email-field" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email-field" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="senha-field" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha-field">
+              </div>
+              <div class="mb-3">
+                <p><a class="forgot-text" href="">Esqueci a senha</a></p>
+              </div>
+              <button type="submit" class="btn btn-dark">Login</button>
             </form>
-            <p><a class="forgot-text" href="">Esqueci a senha</a></p>
         </div>
     </div>
 </div>

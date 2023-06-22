@@ -1,4 +1,4 @@
-.container {
+.back {
     display: flex;
     width: 100%;
     height: 100%;
@@ -20,27 +20,12 @@
 }
 
 .login-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 400px;
     height: 300px;
     padding: 20px;
     background-color: #D4D4D4;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.bt-login {
-    width: 100px;
-    padding: 10px;
-    border: 0;
-    font-weight: bold;
-    font-size: 15px;
-    background-color: #fde200;
-    color: #000000;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .forgot-text {
