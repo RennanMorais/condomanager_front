@@ -16,6 +16,9 @@ import { SistemaComponent } from './sistema.component';
   imports: [
     CommonModule,
     SistemaRoutingModule
+  ],
+  exports: [
+    SistemaComponent
   ]
 })
 export class SistemaModule { }

@@ -9,8 +9,8 @@ const routes: Routes = [
     redirectTo:'condomanager/sistema'
   },
   {
-    path:'login',
-    loadChildren: () => import('./condomanager/sistema/login/login.module').then(m => m.LoginModule)
+    path:'condomanager/login',
+    loadChildren: () => import('./condomanager/login/login.module').then(m => m.LoginModule)
   },
   {
     path:'condomanager/sistema',
