@@ -16,8 +16,8 @@ export class SistemaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  pageCondominio() {
-    this.router.navigate(['condominios'], {relativeTo: this.route});
+  direcionarPagina(rota:string) {
+    this.router.navigate([rota], {relativeTo: this.route});
   }
 
 }

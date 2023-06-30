@@ -1,2 +1,37 @@
 <app-sistema></app-sistema>
-<h1 *ngFor="let nome of listaNomes">{{nome}}</h1>
+<div class="back">
+  <div class="container">
+    <button class="btn btn-outline-warning mt-5 mb-2">Cadastrar Condomínio</button>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Condomínio</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
