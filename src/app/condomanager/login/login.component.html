@@ -2,19 +2,19 @@
     <div class="login">
         <h1 class="d-flex justify-content-center ms-5">CONDOMANAGER LOGO</h1>
         <div class="login-box">
-            <form>
+            <form method="post">
               <div class="mb-3">
                 <label for="email-field" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email-field" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="email-field" aria-describedby="emailHelp" name="email" [(ngModel)]="login.email">
               </div>
               <div class="mb-3">
                 <label for="senha-field" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha-field">
+                <input type="password" class="form-control" id="senha-field" name="password" [(ngModel)]="login.password">
               </div>
               <div class="mb-3">
                 <p><a class="forgot-text" href="">Esqueci a senha</a></p>
               </div>
-              <button type="submit" class="btn btn-dark">Login</button>
+              <button type="submit" class="btn btn-dark" (click)="onLogin()">Login</button>
             </form>
         </div>
     </div>

@@ -1,2 +1,55 @@
-<h1>AQUI VAI TER O TEMPLATE DE MENU</h1>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg menubar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Condomanager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">DashBoard</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Condomínios
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" role="button" (click)="direcionarPagina('condominios')">Condomínios</a></li>
+            <li><a class="dropdown-item" href="#">Prédios</a></li>
+            <li><a class="dropdown-item" href="#">Apartamentos</a></li>
+            <li><a class="dropdown-item" href="#">Área Comum</a></li>
+            <li><a class="dropdown-item" href="#">Reservas</a></li>
+            <li><a class="dropdown-item" href="#">Veículos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Financeiro
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Contas a pagar</a></li>
+            <li><a class="dropdown-item" href="#">Constas a receber</a></li>
+            <li><a class="dropdown-item" href="#">Fornecedores</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Portaria
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Teste</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Configurações
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" href="#">Usuários</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
