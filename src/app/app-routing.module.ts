@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path:'',
     pathMatch:'full',
-    redirectTo:'condomanager/sistema'
+    redirectTo:'condomanager/login'
   },
   {
     path:'condomanager/login',

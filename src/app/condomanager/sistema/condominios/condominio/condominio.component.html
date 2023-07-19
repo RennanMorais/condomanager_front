@@ -9,27 +9,17 @@
           <th scope="col">CNPJ</th>
           <th scope="col">E-mail</th>
           <th scope="col">Endereço</th>
-          <th scope="col">Cidade</th>
+          <th scope="col">Numero</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
+        <tr *ngFor="let cond of condominios">
+          <td>{{cond.nome}}</td>
+          <td>{{cond.cnpj}}</td>
+          <td>{{cond.email}}</td>
+          <td>{{cond.endereco.endereco}}</td>
+          <td>{{cond.endereco.numero}}</td>
         </tr>
       </tbody>
     </table>

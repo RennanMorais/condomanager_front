@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable, catchError, first, of, tap } from 'rxjs';
+import { CondominioService } from './../../../../service/condominios/condominio.service';
+import { Component, OnInit, Pipe } from '@angular/core';
+import { Condominio } from 'src/app/model/Condominio';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-condominio',
@@ -7,12 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CondominioComponent implements OnInit {
 
-  listaNomes: string[]  = ["Nome1", 'Nome2', 'Nome3', 'Nome4'];
+  public condominios: Condominio[] = [];
 
-  constructor() { }
+  constructor(
+    private condominioService: CondominioService,
+  ) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.condominioService.getCondominios().subscribe(
+      (res) => {
+        this.condominios = res;
+      },
+      (httpError) => {
+
+        alert(httpError.error.mensagem);
+      }
+    );
+  }
+
+  onError(errorMsg: string) {
+    alert(errorMsg);
+  }
 
 }
