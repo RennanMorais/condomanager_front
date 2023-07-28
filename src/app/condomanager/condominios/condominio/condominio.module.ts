@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SistemaComponent } from '../../sistema.component';
-import { SistemaModule } from '../../sistema.module';
 
+import { CondominioRoutingModule } from './condominio-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SistemaModule
+    CondominioRoutingModule
   ]
 })
 export class CondominioModule { }

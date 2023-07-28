@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './guards/auth.guard';
+import { CondominioComponent } from './condomanager/condominios/condominio/condominio.component';
+import { DashboardComponent } from './condomanager/condominios/dashboard/dashboard.component';
+import { MenuComponent } from './condomanager/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CondominioComponent,
+    DashboardComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    HttpClientModule
+    AppRoutingModule
   ],
-  providers: [AuthGuard],
+  providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
