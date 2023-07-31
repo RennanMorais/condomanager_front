@@ -1,10 +1,13 @@
+import { Cidade } from "./Cidade";
+import { Estado } from "./Estado";
+
 export interface Endereco {
   id: number;
   endereco: string;
   numero: string;
   complemento: string;
   bairro: string;
-  estado: number;
-  cidade: number;
+  estado: Estado;
+  cidade: Cidade;
 
 }

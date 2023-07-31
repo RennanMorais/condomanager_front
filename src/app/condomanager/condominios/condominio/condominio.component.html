@@ -1,0 +1,35 @@
+<app-menu></app-menu>
+<div class="back">
+  <div class="container">
+    <button class="btn btn-warning mt-5 mb-2">Cadastrar Condomínio</button>
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Condomínio</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Numero</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cond of condominios">
+          <td>{{cond.nome}}</td>
+          <td>{{cond.cnpj}}</td>
+          <td>{{cond.email}}</td>
+          <td>{{cond.endereco.endereco}}</td>
+          <td>{{cond.endereco.numero}}</td>
+          <td>{{cond.endereco.cidade.nome}}</td>
+          <td>{{cond.endereco.estado.nome}}</td>
+          <td>
+            <button class="btn btn-primary me-2">Editar</button>
+            <button class="btn btn-danger">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

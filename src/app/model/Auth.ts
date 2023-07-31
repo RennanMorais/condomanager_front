@@ -1,5 +1,5 @@
 import { Acesso } from "./Acesso";
 
-export interface Auth {
-  acesso: Acesso
+export class Auth {
+  acesso: Acesso | undefined;
 }

@@ -1,54 +1,49 @@
-import { UserLogin } from 'src/app/model/Login';
-import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/service/suth/auth.service';
-import { Auth } from 'src/app/model/Auth';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Acesso } from 'src/app/model/Acesso';
+import { Auth } from 'src/app/model/Auth';
+import { UserLogin } from 'src/app/model/Login';
+import { ResponseMensagem } from 'src/app/model/ResponseMensagem';
+import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  login: UserLogin = {
-    email: "",
-    password: ""
-  };
+  login: UserLogin = new UserLogin;
+  response: ResponseMensagem[] = [];
+  responseHttp: ResponseMensagem = new ResponseMensagem;
+  show: boolean = false;
 
-  acesso: Acesso = {
-    nivel: "",
-    accessToken: ""
-  };
-
-  auth: Auth = {
-    acesso: this.acesso
+  public auth: Auth = {
+    acesso: new Acesso
   }
 
   constructor(
     private authService: AuthService,
-  ) {
+    private router: Router
+  ) {}
 
-  }
-
-  ngOnInit(): void {
-  }
+  // }
 
   onLogin() {
     this.authService.autenticar(this.login).subscribe(
       (res) => {
         this.auth = res;
-        alert("Usuário logado com suceeso NIVEL: "+this.auth.acesso.nivel);
+        localStorage.setItem('nivel', 'Nivel: '+this.auth.acesso?.nivel);
+        localStorage.setItem('accessToken', 'Bearer '+this.auth.acesso?.accessToken);
+        console.log(localStorage);
+        this.router.navigate(['condomanager/sistema']);
       },
       (httpError) => {
-        alert(httpError.error.mensagem);
-        console.log(httpError);
+        this.response = httpError.error.erros;
+        this.responseHttp.mensagem = httpError.error.mensagem;
+        this.show = true;
       }
     );
-  }
-
-  onError(errorMsg: string) {
-    alert(errorMsg);
   }
 
 }
