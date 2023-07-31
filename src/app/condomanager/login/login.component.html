@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div>
+    <div class="alert alert-danger text-center" role="alert" *ngIf="show" (click)="show = false">
+      <p *ngFor="let r of response">{{r.mensagem }}</p>
+      <p>{{ responseHttp.mensagem }}</p>
+    </div>
+    <div class="login">
+        <div class="logo-box">
+          <h2>CONDOMANAGER</h2>
+        </div>
+        <div class="login-box">
+          <form method="post">
+            <div class="mb-3">
+              <label for="email-field" class="form-label">Email</label>
+              <input type="email" required="required" class="form-control" id="email-field" aria-describedby="emailHelp" name="email" [(ngModel)]="login.email">
+            </div>
+            <div class="mb-3">
+              <label for="senha-field" class="form-label">Senha</label>
+              <input type="password" required="required" class="form-control" id="senha-field" name="password" [(ngModel)]="login.password">
+            </div>
+            <div class="mb-3">
+              <p><a class="forgot-text" href="">Esqueci a senha</a></p>
+            </div>
+            <button type="submit" class="btn btn-dark" (click)="onLogin()">Login</button>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>

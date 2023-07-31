@@ -5,16 +5,20 @@ const routes: Routes = [
   {
     path:'',
     pathMatch:'full',
-    redirectTo:'condomanager/sistema/condominios'
+    redirectTo:'condomanager/login'
   },
   {
-    path:'condomanager/sistema/inicio',
+    path:'condomanager/login',
+    loadChildren: () => import('./condomanager/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path:'condomanager/sistema',
     loadChildren: () => import('./condomanager/condominios/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path:'condomanager/sistema/condominios',
     loadChildren: () => import('./condomanager/condominios/condominio/condominio.module').then(m => m.CondominioModule)
-  },
+  }
 ];
 
 @NgModule({

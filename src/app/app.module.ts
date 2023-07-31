@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { CondominioComponent } from './condomanager/condominios/condominio/condominio.component';
 import { DashboardComponent } from './condomanager/condominios/dashboard/dashboard.component';
 import { MenuComponent } from './condomanager/menu/menu.component';
+import { LoginComponent } from './condomanager/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     CondominioComponent,
     DashboardComponent,
-    MenuComponent
+    MenuComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })
