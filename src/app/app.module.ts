@@ -9,6 +9,8 @@ import { MenuComponent } from './condomanager/menu/menu.component';
 import { LoginComponent } from './condomanager/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './service/auth/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule
   ],
   providers: [
-
+    AuthService,
+    AuthGuard
   ],
   exports: [],
   bootstrap: [AppComponent]

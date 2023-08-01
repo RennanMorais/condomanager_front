@@ -30,12 +30,11 @@ export class LoginComponent {
   // }
 
   onLogin() {
-    this.authService.autenticar(this.login).subscribe(
+    this.authService.fazerLogin(this.login).subscribe(
       (res) => {
         this.auth = res;
         localStorage.setItem('nivel', 'Nivel: '+this.auth.acesso?.nivel);
         localStorage.setItem('accessToken', 'Bearer '+this.auth.acesso?.accessToken);
-        console.log(localStorage);
         this.router.navigate(['condomanager/sistema']);
       },
       (httpError) => {

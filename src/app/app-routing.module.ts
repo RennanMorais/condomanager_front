@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,11 +14,13 @@ const routes: Routes = [
   },
   {
     path:'condomanager/sistema',
-    loadChildren: () => import('./condomanager/condominios/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./condomanager/condominios/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
   },
   {
     path:'condomanager/sistema/condominios',
-    loadChildren: () => import('./condomanager/condominios/condominio/condominio.module').then(m => m.CondominioModule)
+    loadChildren: () => import('./condomanager/condominios/condominio/condominio.module').then(m => m.CondominioModule),
+    canActivate: [AuthGuard]
   }
 ];
 
