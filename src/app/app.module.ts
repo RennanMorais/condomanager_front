@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './service/auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { PredioComponent } from './condomanager/condominios/predio/predio.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthGuard } from './guards/auth.guard';
     CondominioComponent,
     DashboardComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    PredioComponent
   ],
   imports: [
     BrowserModule,

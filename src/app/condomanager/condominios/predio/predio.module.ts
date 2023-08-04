@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PredioRoutingModule } from './predio-routing.module';
 import { PredioComponent } from './predio.component';
+import { MenuModule } from '../../menu/menu.module';
 
 
 @NgModule({
-  declarations: [
-    PredioComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     PredioRoutingModule

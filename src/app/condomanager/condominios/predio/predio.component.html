@@ -1,1 +1,48 @@
-<p>predio works!</p>
+<app-menu></app-menu>
+<div class="back">
+  <div class="container">
+    <button class="btn btn-warning mt-5 mb-2">Cadastrar Prédio</button>
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Bloco</th>
+          <th scope="col">Condominio</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of predios">
+          <td>{{p.nome}}</td>
+          <td>{{p.condominio.nome}}</td>
+          <td>
+
+            <button class="btn btn-primary me-2">Editar</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#excluirModal' + p.id">
+              Excluir
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" [id]="'excluirModal' + p.id" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{p.nome}} do Condominio: {{p.condominio.nome}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="deletarPredio(p.id)">Sim</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

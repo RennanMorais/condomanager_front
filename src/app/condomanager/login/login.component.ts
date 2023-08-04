@@ -14,9 +14,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 export class LoginComponent {
 
   login: UserLogin = new UserLogin;
-  response: ResponseMensagem[] = [];
-  responseHttp: ResponseMensagem = new ResponseMensagem;
-  show: boolean = false;
+  responseHttpErrors: ResponseMensagem[] = [];
 
   public auth: Auth = {
     acesso: new Acesso
@@ -38,9 +36,18 @@ export class LoginComponent {
         this.router.navigate(['condomanager/sistema']);
       },
       (httpError) => {
-        this.response = httpError.error.erros;
-        this.responseHttp.mensagem = httpError.error.mensagem;
-        this.show = true;
+        console.log(httpError);
+        var responseHttpErro: ResponseMensagem = new ResponseMensagem();
+        if(Array.isArray(httpError.error.erros)) {
+          this.responseHttpErrors = httpError.error.erros;
+        } else {
+          responseHttpErro.mensagem = httpError.error.mensagem;
+          if(httpError.error.mensagem == null) {
+            responseHttpErro.mensagem = httpError.statusText;
+          }
+          this.responseHttpErrors = [];
+          this.responseHttpErrors.push(responseHttpErro);
+        }
       }
     );
   }

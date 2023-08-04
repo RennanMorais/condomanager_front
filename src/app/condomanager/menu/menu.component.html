@@ -15,11 +15,16 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/condominios')">Condomínios</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" href="#">Prédios</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" href="#">Apartamentos</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" href="#">Área Comum</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" href="#">Reservas</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" href="#">Veículos</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/predios')">Prédios</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/apartamentos')">Apartamentos</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/areas')">Área Comum</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/reservas')">Reservas</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/veiculos')">Veículos</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/assembleias')">Assembléias</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/moradores')">Moradores</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/ocorrencias')">Ocorrências</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/pets')">Pets</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/reservas')">Reservas</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -49,6 +54,9 @@
             <li><a class="dropdown-item" href="#">Usuários</a></li>
           </ul>
         </li>
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li style="cursor: pointer;" (click)="logout()">Sair</li>
       </ul>
     </div>
   </div>

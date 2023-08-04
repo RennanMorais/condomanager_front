@@ -5,18 +5,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Auth } from 'src/app/model/Auth';
 import { UserLogin } from 'src/app/model/Login';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  token: any = localStorage.getItem('accessToken');
   dataAtual: Date = new Date();
   segundosDataAtual: number = Math.floor(this.dataAtual.getTime() / 1000);
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private router: Router
   ) { }
 
   fazerLogin(login: UserLogin): Observable<Auth> {
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   autenticar() {
-    var decodeToken = this.getDecodeToken(this.token);
+    var decodeToken = this.getDecodeToken(this.recuperarToken());
 
     if(decodeToken.exp > this.segundosDataAtual) {
       return true;
@@ -37,7 +38,21 @@ export class AuthService {
     try {
       return jwt_decode(token);
     } catch(Error) {
-      return null;
+      return '';
     }
+  }
+
+  recuperarToken(): string {
+    var token  = localStorage.getItem('accessToken');
+    if(token != null) {
+      return token;
+    }
+
+    return '';
+  }
+
+  fazLogout() {
+    localStorage.clear();
+    this.router.navigate(['condomanager/login']);
   }
 }

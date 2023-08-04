@@ -21,6 +21,11 @@ const routes: Routes = [
     path:'condomanager/sistema/condominios',
     loadChildren: () => import('./condomanager/condominios/condominio/condominio.module').then(m => m.CondominioModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path:'condomanager/sistema/predios',
+    loadChildren: () => import('./condomanager/condominios/predio/predio.module').then(m => m.PredioModule),
+    canActivate: [AuthGuard]
   }
 ];
 

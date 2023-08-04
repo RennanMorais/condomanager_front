@@ -12,7 +12,7 @@ export class CondominioComponent {
   public condominios: Condominio[] = [];
 
   constructor(
-    private condominioService: CondominioService,
+    private condominioService: CondominioService
   ) {
 
   }
@@ -23,7 +23,6 @@ export class CondominioComponent {
         this.condominios = res;
       },
       (httpError) => {
-
         alert(httpError.error.mensagem);
       }
     );
