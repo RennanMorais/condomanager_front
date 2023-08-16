@@ -18,6 +18,10 @@ export class CondominioComponent {
   }
 
   ngOnInit(): void {
+    this.carregarCondominios();
+  }
+
+  carregarCondominios() {
     this.condominioService.getCondominios().subscribe(
       (res) => {
         this.condominios = res;

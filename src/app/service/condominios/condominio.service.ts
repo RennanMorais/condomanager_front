@@ -28,6 +28,11 @@ export class CondominioService {
     return this.http.get<Predio[]>(this.host + '/predios/listar', { headers: this.headers });
   }
 
+  //Predios por condominio
+  public getPrediosPorCondominio(id: number): Observable<Predio[]> {
+    return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
+  }
+
   public deletarPredio(id: number): Observable<ResponseMensagem> {
     return this.http.delete<ResponseMensagem>(this.host + '/predio/deletar/' + id, { headers: this.headers});
   }

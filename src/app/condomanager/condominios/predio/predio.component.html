@@ -1,8 +1,51 @@
 <app-menu></app-menu>
 <div class="back">
   <div class="container">
-    <button class="btn btn-warning mt-5 mb-2">Cadastrar Prédio</button>
-    <table class="table table-light table-hover">
+
+    <button type="button" class="btn btn-warning mt-5 mb-2" data-bs-toggle="modal" data-bs-target="#cadPredioModal">
+      Cadastrar Prédio
+    </button>
+    <!-- Modal Cadastrar Predio -->
+    <div class="modal fade" id="cadPredioModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Prédio</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post">
+              <div class="mb-3">
+                <label for="cond-field" class="form-label">Condomínio</label>
+                <select class="form-select">
+                  <option v alue="">Selecionar...</option>
+                  <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="nomePredio-field" class="form-label">Nome Prédio/Bloco</label>
+                <input type="predio" required="required" class="form-control" id="email-field" aria-describedby="emailHelp" name="nome" >
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-outline-warning">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <select class="form-select" style="width:200px"
+    (change)="carregarPrediosPorCondominio($any($event.target).value)">
+      <option v alue="">Selecionar...</option>
+      <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
+    </select>
+
+    <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
+      <h6>Lista de prédios vazia, selecione um condomínio</h6>
+    </div>
+    <table class="table table-light table-hover" *ngIf="predios.length != 0">
       <thead>
         <tr>
           <th scope="col">Bloco</th>

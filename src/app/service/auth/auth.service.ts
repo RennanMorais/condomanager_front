@@ -27,7 +27,7 @@ export class AuthService {
   autenticar() {
     var decodeToken = this.getDecodeToken(this.recuperarToken());
 
-    if(decodeToken.exp > this.segundosDataAtual) {
+    if(decodeToken.exp > this.segundosDataAtual && decodeToken != '') {
       return true;
     }
 
