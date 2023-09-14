@@ -5,6 +5,7 @@
     <button type="button" class="btn btn-warning mt-5 mb-2" data-bs-toggle="modal" data-bs-target="#cadPredioModal">
       Cadastrar Prédio
     </button>
+
     <!-- Modal Cadastrar Predio -->
     <div class="modal fade" id="cadPredioModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
@@ -14,23 +15,23 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="post">
+            <form method="post" [formGroup]="form">
               <div class="mb-3">
                 <label for="cond-field" class="form-label">Condomínio</label>
-                <select class="form-select">
-                  <option v alue="">Selecionar...</option>
+                <select class="form-select" formControlName="idCondominio">
+                  <option value="">Selecionar...</option>
                   <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
                 </select>
               </div>
               <div class="mb-3">
                 <label for="nomePredio-field" class="form-label">Nome Prédio/Bloco</label>
-                <input type="predio" required="required" class="form-control" id="email-field" aria-describedby="emailHelp" name="nome" >
+                <input type="predio" formControlName="nome" required="required" class="form-control" id="email-field" aria-describedby="emailHelp" name="nome">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-outline-warning">Cadastrar</button>
+            <button type="button" class="btn btn-outline-warning" (click)="cadastrarPredio()">Cadastrar</button>
           </div>
         </div>
       </div>
@@ -38,7 +39,7 @@
 
     <select class="form-select" style="width:200px"
     (change)="carregarPrediosPorCondominio($any($event.target).value)">
-      <option v alue="">Selecionar...</option>
+      <option value="0">Selecionar...</option>
       <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
     </select>
 
@@ -57,7 +58,7 @@
         <tr *ngFor="let p of predios">
           <td>{{p.nome}}</td>
           <td>{{p.condominio.nome}}</td>
-          <td>
+          <td class="d-flex justify-content-center">
 
             <button class="btn btn-primary me-2">Editar</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#excluirModal' + p.id">

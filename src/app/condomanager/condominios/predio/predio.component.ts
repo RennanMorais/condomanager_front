@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Predio } from 'src/app/model/Predio';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
-import { CondominioComponent } from './../condominio/condominio.component';
 import { Condominio } from 'src/app/model/Condominio';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-predio',
@@ -12,11 +12,17 @@ import { Condominio } from 'src/app/model/Condominio';
 })
 export class PredioComponent {
 
-  public predios: Predio[] = []
-  public condominios: Condominio[] = [];
+  predios: Predio[] = []
+  condominios: Condominio[] = [];
+
+  form = this.formBuilder.group({
+    idCondominio: 0,
+    nome:['']
+  });
 
   constructor(
     private condominioService: CondominioService,
+    private formBuilder: NonNullableFormBuilder,
     private router: Router,
   ) {
 
@@ -32,15 +38,28 @@ export class PredioComponent {
         this.condominios = res;
       },
       (httpError) => {
-        alert(httpError.error.mensagem);
+        console.log(httpError.error.mensagem);
       }
     );
   }
 
   carregarPrediosPorCondominio(id: number) {
-    this.condominioService.getPrediosPorCondominio(id).subscribe(
+    if(id != 0) {
+      this.condominioService.getPrediosPorCondominio(id).subscribe(
+        (res) => {
+          this.predios = res;
+        },
+        (httpError) => {
+          alert(httpError.error.mensagem);
+        }
+      );
+    }
+  }
+
+  cadastrarPredio() {
+    this.condominioService.adicionarPredio(this.form.value).subscribe(
       (res) => {
-        this.predios = res;
+        window.location.reload();
       },
       (httpError) => {
         alert(httpError.error.mensagem);

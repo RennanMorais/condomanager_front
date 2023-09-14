@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  dataAtual: Date = new Date();
-  segundosDataAtual: number = Math.floor(this.dataAtual.getTime() / 1000);
+  segundosDataAtual: number = Math.floor(new Date().getTime() / 1000);
 
   constructor(
     private httpClient: HttpClient,
@@ -27,7 +26,7 @@ export class AuthService {
   autenticar() {
     var decodeToken = this.getDecodeToken(this.recuperarToken());
 
-    if(decodeToken.exp > this.segundosDataAtual && decodeToken != '') {
+    if(decodeToken.exp >= this.segundosDataAtual && decodeToken != '') {
       return true;
     }
 

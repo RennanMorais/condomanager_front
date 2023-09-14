@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Condominio } from '../../model/Condominio';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { Predio } from 'src/app/model/Predio';
 import { ResponseMensagem } from 'src/app/model/ResponseMensagem';
+import { PredioRequest } from 'src/app/model/PredioRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,10 @@ export class CondominioService {
 
   //Condominios
   public getCondominios(): Observable<Condominio[]> {
-    return this.http.get<Condominio[]>(this.host + '/condominio', { headers: this.headers });
+    return this.http.get<Condominio[]>(this.host + '/condominio', { headers: this.headers })
+    .pipe(
+      delay(2000)
+    );
   }
 
   //Predios
@@ -31,6 +35,10 @@ export class CondominioService {
   //Predios por condominio
   public getPrediosPorCondominio(id: number): Observable<Predio[]> {
     return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
+  }
+
+  public adicionarPredio(predio: Partial<PredioRequest>): Observable<ResponseMensagem> {
+    return this.http.post<ResponseMensagem>(this.host + '/predio/cadastrar/', predio, { headers: this.headers});
   }
 
   public deletarPredio(id: number): Observable<ResponseMensagem> {
