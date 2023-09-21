@@ -23,7 +23,7 @@ export class CondominioService {
   public getCondominios(): Observable<Condominio[]> {
     return this.http.get<Condominio[]>(this.host + '/condominio', { headers: this.headers })
     .pipe(
-      delay(2000)
+      delay(1000)
     );
   }
 
