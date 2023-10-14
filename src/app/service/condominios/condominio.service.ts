@@ -37,6 +37,10 @@ export class CondominioService {
     return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
   }
 
+  public adicionarCondominio(cond: Partial<Condominio>): Observable<ResponseMensagem> {
+    return this.http.post<ResponseMensagem>(this.host + '/condominio/cadastrar', cond, { headers: this.headers});
+  }
+
   public adicionarPredio(predio: Partial<PredioRequest>): Observable<ResponseMensagem> {
     return this.http.post<ResponseMensagem>(this.host + '/predio/cadastrar/', predio, { headers: this.headers});
   }
