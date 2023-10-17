@@ -14,10 +14,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="post" [formGroup]="form">
+            <form method="post" [formGroup]="formCadCond">
               <div class="mb-3">
                 <label class="form-label">Nome do Condomínio</label>
-                <input type="text" formControlName="nomeCondominio" required="required" class="form-control">
+                <input type="text" formControlName="nome" required="required" class="form-control">
               </div>
               <div class="mb-3">
                 <label class="form-label">CNPJ</label>
@@ -27,9 +27,10 @@
                 <label class="form-label">E-mail</label>
                 <input type="email" formControlName="email" required="required" class="form-control">
               </div>
+
               <div class="mb-3">
                 <label class="form-label">Endereço</label>
-                <input type="text" formControlName="endereco" required="required" class="form-control">
+                <input type="text" formControlName= "enderecoForm.endereco" required="required" class="form-control">
               </div>
               <div class="mb-3">
                 <label class="form-label">Número</label>

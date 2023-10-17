@@ -1,7 +1,7 @@
 import { Endereco } from './../../../model/Endereco';
 import { DominiosService } from './../../../service/dominios/dominios.service';
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Cidade } from 'src/app/model/Cidade';
 import { Condominio } from 'src/app/model/Condominio';
 import { Estado } from 'src/app/model/Estado';
@@ -18,17 +18,20 @@ export class CondominioComponent {
   public estados: Estado[] = [];
   public cidades: Cidade[] = [];
 
-  form = this.formBuilder.group({
-    nomeCondominio:[''],
+
+  formCadCond = this.formBuilder.group({
+    id: 0,
+    nome:[''],
     cnpj:[''],
     email:[''],
-    Endereco: {
+    enderecoForm: {
+      id: 0,
       endereco:[''],
       numero:[''],
       complemento:[''],
       bairro:[''],
-      estado:0,
-      cidade:0
+      estado: 0,
+      cidade: 0
     }
   });
 
@@ -79,12 +82,15 @@ export class CondominioComponent {
   }
 
   cadastrarCondominio() {
-    this.condominioService.adicionarCondominio(this.form.value).subscribe(
+    this.condominioService.adicionarCondominio(this.formCadCond.value).subscribe(
       (res) => {
         window.location.reload();
       },
       (httpError) => {
-        alert(httpError.error.mensagem);
+        console.log(httpError.error);
+        for(var i = 0; httpError.error.erros.length; i++) {
+          alert('ERRO: '+httpError.error.erros[i].mensagem);
+        }
       }
     );
   }
