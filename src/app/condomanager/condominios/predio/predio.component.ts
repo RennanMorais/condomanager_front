@@ -67,8 +67,8 @@ export class PredioComponent {
     );
   }
 
-  deletarPredio(id: number) {
-    return this.condominioService.deletarPredio(id).subscribe(
+  deletarPredio(predio: Predio) {
+    return this.condominioService.deletarPredio(predio).subscribe(
       (response) => {
         window.location.reload();
       },

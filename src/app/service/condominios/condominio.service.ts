@@ -1,6 +1,6 @@
+import { Condominio } from 'src/app/model/Condominio';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Condominio } from '../../model/Condominio';
 import { Observable, delay } from 'rxjs';
 import { Predio } from 'src/app/model/Predio';
 import { ResponseMensagem } from 'src/app/model/ResponseMensagem';
@@ -45,8 +45,8 @@ export class CondominioService {
     return this.http.post<ResponseMensagem>(this.host + '/predio/cadastrar/', predio, { headers: this.headers});
   }
 
-  public deletarPredio(id: number): Observable<ResponseMensagem> {
-    return this.http.delete<ResponseMensagem>(this.host + '/predio/deletar/' + id, { headers: this.headers});
+  public deletarPredio(predio: Predio): Observable<ResponseMensagem> {
+    return this.http.delete<ResponseMensagem>(this.host + '/predio/deletar/' + predio.id, { headers: this.headers});
   }
 
 }

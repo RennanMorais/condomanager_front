@@ -57,7 +57,7 @@
       <tbody>
         <tr *ngFor="let p of predios">
           <td>{{p.nome}}</td>
-          <td>{{p.condominio.nome}}</td>
+          <td>{{p.condominio?.nome}}</td>
           <td class="d-flex justify-content-center">
 
             <button class="btn btn-primary me-2">Editar</button>
@@ -74,11 +74,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <p>{{p.nome}} do Condominio: {{p.condominio.nome}}</p>
+                    <p>{{p.nome}} do Condominio: {{p.condominio?.nome}}</p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-outline-primary" (click)="deletarPredio(p.id)">Sim</button>
+                    <button type="button" class="btn btn-outline-primary" (click)="deletarPredio(p)">Sim</button>
                   </div>
                 </div>
               </div>

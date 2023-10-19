@@ -13,27 +13,12 @@ import { CondominioService } from 'src/app/service/condominios/condominio.servic
   styleUrls: ['./condominio.component.css']
 })
 export class CondominioComponent {
+[x: string]: any;
 
   public condominios: Condominio[] = [];
   public estados: Estado[] = [];
   public cidades: Cidade[] = [];
-
-
-  formCadCond = this.formBuilder.group({
-    id: 0,
-    nome:[''],
-    cnpj:[''],
-    email:[''],
-    enderecoForm: {
-      id: 0,
-      endereco:[''],
-      numero:[''],
-      complemento:[''],
-      bairro:[''],
-      estado: 0,
-      cidade: 0
-    }
-  });
+  public condominio: Condominio = new Condominio;
 
   constructor(
     private condominioService: CondominioService,
@@ -82,12 +67,13 @@ export class CondominioComponent {
   }
 
   cadastrarCondominio() {
-    this.condominioService.adicionarCondominio(this.formCadCond.value).subscribe(
+    this.condominioService.adicionarCondominio(this.condominio).subscribe(
       (res) => {
         window.location.reload();
       },
       (httpError) => {
         console.log(httpError.error);
+        console.log(this.condominio);
         for(var i = 0; httpError.error.erros.length; i++) {
           alert('ERRO: '+httpError.error.erros[i].mensagem);
         }
