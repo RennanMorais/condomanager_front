@@ -5,6 +5,7 @@ import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Cidade } from 'src/app/model/Cidade';
 import { Condominio } from 'src/app/model/Condominio';
 import { Estado } from 'src/app/model/Estado';
+import { CondominioRequest } from 'src/app/model/request/CondominioRequest';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class CondominioComponent {
   public condominios: Condominio[] = [];
   public estados: Estado[] = [];
   public cidades: Cidade[] = [];
-  public condominio: Condominio = new Condominio;
+  public condominio: CondominioRequest = new CondominioRequest;
 
   constructor(
     private condominioService: CondominioService,

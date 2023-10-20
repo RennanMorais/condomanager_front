@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Acesso } from 'src/app/model/Acesso';
 import { Auth } from 'src/app/model/Auth';
 import { UserLogin } from 'src/app/model/Login';
-import { ResponseMensagem } from 'src/app/model/ResponseMensagem';
+import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Endereco } from "./Endereco";
 
-export class Condominio{
+export class Condominio {
 	id!: number;
 	nome!: string;
 	cnpj!: string;
