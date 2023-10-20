@@ -7,8 +7,11 @@ import { CondominioComponent } from './condomanager/condominios/condominio/condo
 import { DashboardComponent } from './condomanager/condominios/dashboard/dashboard.component';
 import { MenuComponent } from './condomanager/menu/menu.component';
 import { LoginComponent } from './condomanager/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './service/auth/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { PredioComponent } from './condomanager/condominios/predio/predio.component';
 
 @NgModule({
   declarations: [
@@ -16,16 +19,19 @@ import { HttpClientModule } from '@angular/common/http';
     CondominioComponent,
     DashboardComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    PredioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-
+    AuthService,
+    AuthGuard
   ],
   exports: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,10 @@
 <div class="login-container">
   <div>
-    <div class="alert alert-danger text-center" role="alert" *ngIf="show" (click)="show = false">
-      <p *ngFor="let r of response">{{r.mensagem }}</p>
-      <p>{{ responseHttp.mensagem }}</p>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="responseHttpErrors.length > 0">
+      <strong>
+        <p *ngFor="let e of responseHttpErrors">{{e.mensagem}}</p>
+      </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="login">
         <div class="logo-box">

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Acesso } from 'src/app/model/Acesso';
 import { Auth } from 'src/app/model/Auth';
 import { UserLogin } from 'src/app/model/Login';
-import { ResponseMensagem } from 'src/app/model/ResponseMensagem';
+import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
@@ -14,9 +14,7 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 export class LoginComponent {
 
   login: UserLogin = new UserLogin;
-  response: ResponseMensagem[] = [];
-  responseHttp: ResponseMensagem = new ResponseMensagem;
-  show: boolean = false;
+  responseHttpErrors: ResponseMensagem[] = [];
 
   public auth: Auth = {
     acesso: new Acesso
@@ -30,18 +28,26 @@ export class LoginComponent {
   // }
 
   onLogin() {
-    this.authService.autenticar(this.login).subscribe(
+    this.authService.fazerLogin(this.login).subscribe(
       (res) => {
         this.auth = res;
         localStorage.setItem('nivel', 'Nivel: '+this.auth.acesso?.nivel);
         localStorage.setItem('accessToken', 'Bearer '+this.auth.acesso?.accessToken);
-        console.log(localStorage);
         this.router.navigate(['condomanager/sistema']);
       },
       (httpError) => {
-        this.response = httpError.error.erros;
-        this.responseHttp.mensagem = httpError.error.mensagem;
-        this.show = true;
+        console.log(httpError);
+        var responseHttpErro: ResponseMensagem = new ResponseMensagem();
+        if(Array.isArray(httpError.error.erros)) {
+          this.responseHttpErrors = httpError.error.erros;
+        } else {
+          responseHttpErro.mensagem = httpError.error.mensagem;
+          if(httpError.error.mensagem == null) {
+            responseHttpErro.mensagem = httpError.statusText;
+          }
+          this.responseHttpErrors = [];
+          this.responseHttpErrors.push(responseHttpErro);
+        }
       }
     );
   }

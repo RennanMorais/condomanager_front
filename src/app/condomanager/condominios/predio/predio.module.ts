@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PredioRoutingModule } from './predio-routing.module';
-import { PredioComponent } from './predio.component';
 
 
 @NgModule({
-  declarations: [
-    PredioComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     PredioRoutingModule
