@@ -33,6 +33,10 @@ export class CondominioService {
     return this.http.get<Predio[]>(this.host + '/predios/listar', { headers: this.headers });
   }
 
+  public getPredio(id: number): Observable<Predio> {
+    return this.http.get<Predio>(this.host + '/predios/buscar/' + id, { headers: this.headers });
+  }
+
   //Predios por condominio
   public getPrediosPorCondominio(id: number): Observable<Predio[]> {
     return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
@@ -44,6 +48,10 @@ export class CondominioService {
 
   public adicionarPredio(predio: Partial<PredioRequest>): Observable<ResponseMensagem> {
     return this.http.post<ResponseMensagem>(this.host + '/predio/cadastrar/', predio, { headers: this.headers});
+  }
+
+  public editarPredio(idPredio: number, predio: Partial<PredioRequest>): Observable<ResponseMensagem> {
+    return this.http.put<ResponseMensagem>(this.host + '/predio/editar/' + idPredio, predio, { headers: this.headers});
   }
 
   public deletarPredio(predio: Predio): Observable<ResponseMensagem> {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 import { Acesso } from 'src/app/model/Acesso';
 import { Auth } from 'src/app/model/Auth';
 import { UserLogin } from 'src/app/model/Login';
@@ -27,6 +28,12 @@ export class LoginComponent {
 
   // }
 
+  ngOnInit(): void {
+    if(this.authService.autenticar()) {
+      this.router.navigate(['condomanager/sistema']);
+    }
+  }
+
   onLogin() {
     this.authService.fazerLogin(this.login).subscribe(
       (res) => {
@@ -36,7 +43,6 @@ export class LoginComponent {
         this.router.navigate(['condomanager/sistema']);
       },
       (httpError) => {
-        console.log(httpError);
         var responseHttpErro: ResponseMensagem = new ResponseMensagem();
         if(Array.isArray(httpError.error.erros)) {
           this.responseHttpErrors = httpError.error.erros;

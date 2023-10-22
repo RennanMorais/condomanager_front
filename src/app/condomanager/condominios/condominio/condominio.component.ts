@@ -23,8 +23,7 @@ export class CondominioComponent {
 
   constructor(
     private condominioService: CondominioService,
-    private dominios: DominiosService,
-    private formBuilder: NonNullableFormBuilder,
+    private dominios: DominiosService
   ) {
 
   }

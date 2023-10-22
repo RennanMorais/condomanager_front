@@ -15,7 +15,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="post" [formGroup]="form">
+            <form method="post" [formGroup]="formCadastrar">
               <div class="mb-3">
                 <label for="cond-field" class="form-label">Condomínio</label>
                 <select class="form-select" formControlName="idCondominio">
@@ -40,12 +40,19 @@
     <select class="form-select" style="width:200px"
     (change)="carregarPrediosPorCondominio($any($event.target).value)">
       <option value="0">Selecionar...</option>
-      <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
+      <option *ngFor="let cond of condominios" [value]="cond.id">{{ cond.nome }}</option>
     </select>
 
+    <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="respostaSucesso.mensagem">
+      <strong>
+        <p>{{ respostaSucesso.mensagem }}</p>
+      </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
       <h6>Lista de prédios vazia, selecione um condomínio</h6>
     </div>
+
     <table class="table table-light table-hover" *ngIf="predios.length != 0">
       <thead>
         <tr>
@@ -60,8 +67,43 @@
           <td>{{p.condominio?.nome}}</td>
           <td class="d-flex justify-content-center">
 
-            <button class="btn btn-primary me-2">Editar</button>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#excluirModal' + p.id">
+            <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" [attr.data-bs-target]="'#editModal' + p.id" (click)="carregarPredio(p.id!)">Editar</button>
+
+             <!-- Modal editar Predio -->
+            <div class="modal fade" [id]="'editModal' + p.id" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Prédio</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post">
+
+                      <div class="mb-3">
+                        <label for="cond-field" class="form-label">Condomínio</label>
+                        <select class="form-select" name="idCondominio" [(ngModel)]="predio.idCondominio">
+                          <option [value]="p.condominio?.id">{{ p.condominio?.nome }}</option>
+                          <option *ngFor="let cond of condominios" [value]="cond.id">{{ cond.nome }}</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="nomePredio-field" class="form-label">Nome Prédio/Bloco</label>
+                        <input type="predio" required="required" class="form-control" [value]="p.nome" name="nome" [(ngModel)]="predio.nome">
+                      </div>
+
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-warning" (click)="editarPredio(p.id!)">Salvar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#excluirModal' + p.id">
               Excluir
             </button>
 

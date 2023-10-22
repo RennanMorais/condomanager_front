@@ -1,9 +1,11 @@
+import { Condominio } from './../../../model/Condominio';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Predio } from 'src/app/model/Predio';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
-import { Condominio } from 'src/app/model/Condominio';
 import { NonNullableFormBuilder } from '@angular/forms';
+import { PredioRequest } from 'src/app/model/request/PredioRequest';
+import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 
 @Component({
   selector: 'app-predio',
@@ -12,10 +14,13 @@ import { NonNullableFormBuilder } from '@angular/forms';
 })
 export class PredioComponent {
 
-  predios: Predio[] = []
-  condominios: Condominio[] = [];
+  public predios: Predio[] = []
+  public condominios: Condominio[] = [];
+  public condominio: Condominio = new Condominio();
+  public predio: PredioRequest = new PredioRequest();
+  public respostaSucesso: ResponseMensagem = new ResponseMensagem();
 
-  form = this.formBuilder.group({
+  formCadastrar = this.formBuilder.group({
     idCondominio: 0,
     nome:['']
   });
@@ -29,7 +34,9 @@ export class PredioComponent {
   }
 
   ngOnInit(): void {
+
     this.carregarCondominios();
+
   }
 
   carregarCondominios() {
@@ -53,11 +60,35 @@ export class PredioComponent {
           alert(httpError.error.mensagem);
         }
       );
+    } else {
+      this.predios = [];
+    }
+  }
+
+  carregarPredio(id: number) {
+    if(id != 0) {
+      this.condominioService.getPredio(id).subscribe(
+        (res) => {
+          this.predio.idCondominio = res.condominio?.id;
+          this.predio.nome = res.nome;
+        }
+      )
     }
   }
 
   cadastrarPredio() {
-    this.condominioService.adicionarPredio(this.form.value).subscribe(
+    this.condominioService.adicionarPredio(this.formCadastrar.value).subscribe(
+      (res) => {
+        window.location.reload();
+      },
+      (httpError) => {
+        alert(httpError.error.mensagem);
+      }
+    );
+  }
+
+  editarPredio(idPredio: number) {
+    this.condominioService.editarPredio(idPredio, this.predio).subscribe(
       (res) => {
         window.location.reload();
       },
