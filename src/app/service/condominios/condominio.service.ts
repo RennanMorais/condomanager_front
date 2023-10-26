@@ -54,6 +54,10 @@ export class CondominioService {
     return this.http.put<ResponseMensagem>(this.host + '/predio/editar/' + idPredio, predio, { headers: this.headers});
   }
 
+  public deletarCondominio(condominio: Condominio): Observable<ResponseMensagem> {
+    return this.http.delete<ResponseMensagem>(this.host + '/condominio/deletar/' + condominio.id, { headers: this.headers });
+  }
+
   public deletarPredio(predio: Predio): Observable<ResponseMensagem> {
     return this.http.delete<ResponseMensagem>(this.host + '/predio/deletar/' + predio.id, { headers: this.headers});
   }

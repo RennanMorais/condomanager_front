@@ -1,3 +1,4 @@
+import { ResponseMensagem } from './../../../model/response/ResponseMensagem';
 import { Condominio } from './../../../model/Condominio';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -5,7 +6,6 @@ import { Predio } from 'src/app/model/Predio';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { PredioRequest } from 'src/app/model/request/PredioRequest';
-import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 
 @Component({
   selector: 'app-predio',
@@ -34,9 +34,8 @@ export class PredioComponent {
   }
 
   ngOnInit(): void {
-
     this.carregarCondominios();
-
+    console.log(this.respostaSucesso.mensagem);
   }
 
   carregarCondominios() {
@@ -90,12 +89,16 @@ export class PredioComponent {
   editarPredio(idPredio: number) {
     this.condominioService.editarPredio(idPredio, this.predio).subscribe(
       (res) => {
-        window.location.reload();
+        this.respostaSucesso = res;
       },
       (httpError) => {
         alert(httpError.error.mensagem);
       }
     );
+  }
+
+  reload() {
+    window.location.reload();
   }
 
   deletarPredio(predio: Predio) {
@@ -104,7 +107,7 @@ export class PredioComponent {
         window.location.reload();
       },
       (httpError) => {
-
+        alert(httpError);
       }
     );
   }

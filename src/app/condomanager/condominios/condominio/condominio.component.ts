@@ -6,6 +6,7 @@ import { Cidade } from 'src/app/model/Cidade';
 import { Condominio } from 'src/app/model/Condominio';
 import { Estado } from 'src/app/model/Estado';
 import { CondominioRequest } from 'src/app/model/request/CondominioRequest';
+import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class CondominioComponent {
   public condominios: Condominio[] = [];
   public estados: Estado[] = [];
   public cidades: Cidade[] = [];
-  public condominio: CondominioRequest = new CondominioRequest;
+  public condominio: CondominioRequest = new CondominioRequest();
+  public responsemensagem: ResponseMensagem = new ResponseMensagem();
 
   constructor(
     private condominioService: CondominioService,
@@ -77,6 +79,18 @@ export class CondominioComponent {
         for(var i = 0; httpError.error.erros.length; i++) {
           alert('ERRO: '+httpError.error.erros[i].mensagem);
         }
+      }
+    );
+  }
+
+  deletarCondominio(condominio: Condominio) {
+    return this.condominioService.deletarCondominio(condominio).subscribe(
+      (response) => {
+        window.location.reload();
+        this.responsemensagem = response;
+      },
+      (httpError) => {
+        console.log(httpError.error);
       }
     );
   }
