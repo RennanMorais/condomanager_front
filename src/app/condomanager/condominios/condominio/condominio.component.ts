@@ -12,7 +12,7 @@ import { CondominioService } from 'src/app/service/condominios/condominio.servic
 @Component({
   selector: 'app-condominio',
   templateUrl: './condominio.component.html',
-  styleUrls: ['./condominio.component.css']
+  styleUrls: ['./condominio.component.scss']
 })
 export class CondominioComponent {
 [x: string]: any;

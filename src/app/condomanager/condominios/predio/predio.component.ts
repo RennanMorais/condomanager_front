@@ -10,7 +10,7 @@ import { PredioRequest } from 'src/app/model/request/PredioRequest';
 @Component({
   selector: 'app-predio',
   templateUrl: './predio.component.html',
-  styleUrls: ['./predio.component.css']
+  styleUrls: ['./predio.component.scss']
 })
 export class PredioComponent {
 

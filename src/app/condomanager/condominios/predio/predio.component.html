@@ -1,10 +1,6 @@
 <app-menu></app-menu>
 <div class="back">
-  <div class="container">
-
-    <button type="button" class="btn btn-outline-warning mt-5 mb-2" data-bs-toggle="modal" data-bs-target="#cadPredioModal">
-      Cadastrar Prédio
-    </button>
+  <div class="container pt-3">
 
     <!-- Modal Cadastrar Predio -->
     <div class="modal fade" id="cadPredioModal" tabindex="-1" aria-hidden="true">
@@ -37,11 +33,16 @@
       </div>
     </div>
 
-    <select class="form-select" style="width:200px"
-    (change)="carregarPrediosPorCondominio($any($event.target).value)">
-      <option value="0">Selecionar...</option>
-      <option *ngFor="let cond of condominios" [value]="cond.id">{{ cond.nome }}</option>
-    </select>
+    <mat-form-field class="me-3">
+      <mat-label>Condomínios</mat-label>
+      <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
+        <mat-option *ngFor="let cond of condominios" [value]="cond.id">
+          {{ cond.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#cadPredioModal">Cadastrar Prédio</button>
 
     <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
       <h6>Lista de prédios vazia, selecione um condomínio</h6>
@@ -134,5 +135,6 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 </div>
