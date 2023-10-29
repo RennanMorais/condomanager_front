@@ -4,7 +4,6 @@
       <strong>
         <p *ngFor="let e of responseHttpErrors">{{e.mensagem}}</p>
       </strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="login">
         <div class="logo-box">
@@ -13,12 +12,12 @@
         <div class="login-box">
           <form method="post">
 
-            <mat-form-field class="login-input">
+            <mat-form-field class="input-form-style">
               <mat-label>E-mail</mat-label>
               <input matInput type="email" required="required" name="email" [(ngModel)]="login.email">
             </mat-form-field>
 
-            <mat-form-field class="login-input">
+            <mat-form-field class="input-form-style">
               <mat-label>Senha</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" required name="senha" [(ngModel)]="login.password">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -29,7 +28,7 @@
             <div class="mb-3">
               <p><a class="forgot-text" href="">Esqueci a senha</a></p>
             </div>
-            <button mat-raised-button type="submit" class="btn btn-dark" (click)="onLogin()">Login</button>
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark" (click)="onLogin()">Login</button>
           </form>
         </div>
     </div>
