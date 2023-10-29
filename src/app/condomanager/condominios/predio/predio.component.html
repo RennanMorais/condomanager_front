@@ -2,6 +2,17 @@
 <div class="back">
   <div class="container-fluid pt-3">
 
+    <mat-form-field class="me-3">
+      <mat-label>Condomínios</mat-label>
+      <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
+        <mat-option *ngFor="let cond of condominios" [value]="cond.id">
+          {{ cond.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#cadPredioModal">Cadastrar Prédio</button>
+
     <!-- Modal Cadastrar Predio -->
     <div class="modal fade" id="cadPredioModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
@@ -33,108 +44,41 @@
       </div>
     </div>
 
-    <mat-form-field class="me-3">
-      <mat-label>Condomínios</mat-label>
-      <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
-        <mat-option *ngFor="let cond of condominios" [value]="cond.id">
-          {{ cond.nome }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#cadPredioModal">Cadastrar Prédio</button>
-
-    <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
+    <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
       <h6>Lista de prédios vazia, selecione um condomínio</h6>
     </div>
 
-    <table class="table table-light table-hover" *ngIf="predios.length != 0">
-      <thead>
-        <tr>
-          <th scope="col">Bloco</th>
-          <th scope="col">Condominio</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of predios">
-          <td>{{p.nome}}</td>
-          <td>{{p.condominio?.nome}}</td>
-          <td class="d-flex justify-content-center">
+    <!-- Yable condominios -->
+    <mat-table [dataSource]="predios" class="mat-table" *ngIf="predios.length != 0">
 
-            <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" [attr.data-bs-target]="'#editModal' + p.id" (click)="carregarPredio(p.id!)">Editar</button>
+      <!-- condominio Column -->
+      <ng-container matColumnDef="bloco">
+        <mat-header-cell *matHeaderCellDef>Bloco/Prédio</mat-header-cell>
+        <mat-cell *matCellDef="let predio">{{ predio.nome }}</mat-cell>
+      </ng-container>
 
-             <!-- Modal editar Predio -->
-            <div class="modal fade" [id]="'editModal' + p.id" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Prédio</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+      <!-- cnpj Column -->
+      <ng-container matColumnDef="condominio">
+        <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
+        <mat-cell *matCellDef="let predio">{{ predio.condominio.nome }}</mat-cell>
+      </ng-container>
 
-                  <div class="container">
-                    <div class="alert alert-success alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="respostaSucesso.mensagem != undefined">
-                      <strong>
-                        <p>{{ respostaSucesso.mensagem }}</p>
-                      </strong>
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                  </div>
+      <!-- Ações Column -->
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef="" class="action-column-header">Ações</mat-header-cell>
+        <mat-cell *matCellDef="let course" class="action-column">
+          <button mat-icon-button color="primary" aria-label="Editar curso">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" aria-label="Excluir curso">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
 
-                  <div class="modal-body">
-                    <form method="post">
-
-                      <div class="mb-3">
-                        <label for="cond-field" class="form-label">Condomínio</label>
-                        <select class="form-select" name="idCondominio" [(ngModel)]="predio.idCondominio">
-                          <option [value]="p.condominio?.id">{{ p.condominio?.nome }}</option>
-                          <option *ngFor="let cond of condominios" [value]="cond.id">{{ cond.nome }}</option>
-                        </select>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="nomePredio-field" class="form-label">Nome Prédio/Bloco</label>
-                        <input type="predio" required="required" class="form-control" [value]="p.nome" name="nome" [(ngModel)]="predio.nome">
-                      </div>
-
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="reload()">Fechar</button>
-                    <button type="button" class="btn btn-outline-warning" (click)="editarPredio(p.id!)">Salvar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#excluirModal' + p.id">
-              Excluir
-            </button>
-
-            <!-- Modal Excluir -->
-            <div class="modal fade" [id]="'excluirModal' + p.id" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tem certeza que deseja excluir?</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>{{p.nome}} do Condominio: {{p.condominio?.nome}}</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Não</button>
-                    <button type="button" class="btn btn-outline-primary" (click)="deletarPredio(p)">Sim</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
 
   </div>
 </div>

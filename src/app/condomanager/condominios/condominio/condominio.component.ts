@@ -9,10 +9,11 @@ import { CondominioRequest } from 'src/app/model/request/CondominioRequest';
 import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-condominio',
@@ -82,13 +83,14 @@ export class CondominioComponent {
 }
 
 @Component({
-  selector: 'cadastro-condominio-dialog',
-  templateUrl: 'cadastrar-condominio-dialog.html',
+  selector: 'cadastrar-condominio-dialog',
+  templateUrl: 'components/cadastrar-condominio-dialog.html',
   standalone: true,
   imports: [
     CommonModule,
-    MatDialogModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -136,15 +138,15 @@ export class CadastroCondominioDialog {
   }
 
   cadastrarCondominio() {
+    console.log(this.request);
     this.condominioService.adicionarCondominio(this.request).subscribe(
       (res) => {
         window.location.reload();
       },
       (httpError) => {
         console.log(httpError.error);
-        console.log(this.request);
         for(var i = 0; httpError.error.erros.length; i++) {
-          alert('ERRO: '+httpError.error.erros[i].mensagem);
+          console.log('ERRO: '+httpError.error.erros[i].mensagem);
         }
       }
     );

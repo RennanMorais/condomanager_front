@@ -4,34 +4,14 @@
 
     <button mat-raised-button color="primary" (click)="openCadCondominioModal()">Cadastrar Condomínio</button>
 
-    <!-- Modal Cadastrar condominio -->
-    <div class="modal fade" id="cadCondModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Condomínio</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-outline-warning" (click)="cadastrarCondominio()">Cadastrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="d-flex justify-content-center" *ngIf="condominios.length == 0">
       <div class="spinner-border text-warning" role="status">
         <span class="visually-hidden"></span>
       </div>
     </div>
 
+    <!-- Yable condominios -->
     <mat-table [dataSource]="condominios" class="mat-table" *ngIf="condominios.length != 0">
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
 
       <!-- condominio Column -->
       <ng-container matColumnDef="condominio">

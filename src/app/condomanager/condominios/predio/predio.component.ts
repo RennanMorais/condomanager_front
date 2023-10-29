@@ -19,6 +19,7 @@ export class PredioComponent {
   public condominio: Condominio = new Condominio();
   public predio: PredioRequest = new PredioRequest();
   public respostaSucesso: ResponseMensagem = new ResponseMensagem();
+  readonly displayedColumns: string[] = ['bloco', 'condominio', 'acoes'];
 
   formCadastrar = this.formBuilder.group({
     idCondominio: 0,

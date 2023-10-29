@@ -39,7 +39,7 @@
 
     <mat-form-field class="input-form-style">
       <mat-label class="form-label">Estado</mat-label>
-      <mat-select (selectionChange)="carregarCidadePorEstado($any($event).value)" [(ngModel)]="request.endereco.idEstado">
+      <mat-select (selectionChange)="carregarCidadePorEstado($any($event).value)" name="idEstado" [(ngModel)]="request.endereco.idEstado">
         <mat-option *ngFor="let estado of estados" [value]="estado.id">
           {{ estado.nome }}
         </mat-option>
@@ -48,8 +48,8 @@
 
     <mat-form-field class="input-form-style">
       <mat-label>Cidade</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let cidade of cidades" [value]="cidade.id" [(ngModel)]="request.endereco.idCidade">
+      <mat-select name="idCidade" [(ngModel)]="request.endereco.idCidade">
+        <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
           {{ cidade.nome }}
         </mat-option>
       </mat-select>
