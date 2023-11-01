@@ -1,0 +1,23 @@
+<style  type="text/css">
+  .dialog {
+    width: 420px;
+    height: 160px;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .dialog-content {
+    margin-bottom: 30px;
+  }
+</style>
+
+<div  class="dialog">
+  <h4 mat-dialog-title class="dialog-title">Deletar prédio</h4>
+  <div mat-dialog-content class="dialog-content">
+    Você quer mesmo deletar: {{predio.nome}} ?
+  </div>
+  <div mat-dialog-actions class="dialog-btn">
+    <button mat-raised-button color="warn" (click)="closeDeleteModal()">Não</button>
+    <button mat-button mat-dialog-close cdkFocusInitial (click)="deletarPredio()">Sim</button>
+  </div>
+</div>

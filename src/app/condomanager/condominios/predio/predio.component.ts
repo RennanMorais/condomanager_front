@@ -1,11 +1,15 @@
 import { ResponseMensagem } from './../../../model/response/ResponseMensagem';
 import { Condominio } from './../../../model/Condominio';
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Predio } from 'src/app/model/Predio';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
 import { NonNullableFormBuilder } from '@angular/forms';
 import { PredioRequest } from 'src/app/model/request/PredioRequest';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-predio',
@@ -29,7 +33,8 @@ export class PredioComponent {
   constructor(
     private condominioService: CondominioService,
     private formBuilder: NonNullableFormBuilder,
-    private router: Router,
+    public dialog: MatDialog,
+    private router: Router
   ) {
 
   }
@@ -98,12 +103,46 @@ export class PredioComponent {
     );
   }
 
-  reload() {
-    window.location.reload();
+  openDeletarPredioModal(predio: Predio) {
+    this.dialog.open(DeletarPredioDialog, {
+      data: {
+        id: predio.id,
+        nome: predio.nome
+      }
+    });
   }
 
-  deletarPredio(predio: Predio) {
-    return this.condominioService.deletarPredio(predio).subscribe(
+}
+
+import {Inject} from '@angular/core';
+
+@Component({
+  selector: 'deletar-predio-dialog',
+  templateUrl: 'components/deletar-predio-dialog.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+  ]
+})
+export class DeletarPredioDialog {
+
+  public predio: Predio = this.data;
+
+  constructor(
+    private condominioService: CondominioService,
+    public dialogDef: MatDialogRef<DeletarPredioDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: Predio,
+  ) {
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  deletarPredio() {
+    return this.condominioService.deletarPredio(this.data).subscribe(
       (response) => {
         window.location.reload();
       },
@@ -111,6 +150,10 @@ export class PredioComponent {
         alert(httpError);
       }
     );
+  }
+
+  closeDeleteModal() {
+    this.dialogDef.close();
   }
 
 }
