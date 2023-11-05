@@ -11,38 +11,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" data-bs-toggle="modal" data-bs-target="#cadPredioModal">Cadastrar Prédio</button>
-
-    <!-- Modal Cadastrar Predio -->
-    <div class="modal fade" id="cadPredioModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Prédio</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="post" [formGroup]="formCadastrar">
-              <div class="mb-3">
-                <label for="cond-field" class="form-label">Condomínio</label>
-                <select class="form-select" formControlName="idCondominio">
-                  <option value="">Selecionar...</option>
-                  <option *ngFor="let cond of condominios" [value]="cond.id">{{cond.nome}}</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="nomePredio-field" class="form-label">Nome Prédio/Bloco</label>
-                <input type="predio" formControlName="nome" required="required" class="form-control" aria-describedby="emailHelp" name="nome">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-outline-warning" (click)="cadastrarPredio()">Cadastrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <button mat-raised-button color="primary" (click)="openCadastrarPredioModal()">Cadastrar Prédio</button>
 
     <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
       <h6>Lista de prédios vazia, selecione um condomínio</h6>
@@ -67,7 +36,7 @@
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef class="action-column-header">Ações</mat-header-cell>
         <mat-cell *matCellDef="let predio" class="action-column">
-          <button mat-icon-button color="primary" aria-label="Editar prédio">
+          <button mat-icon-button color="primary" aria-label="Editar prédio" (click)="openEditarPredioModal(predio)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" aria-label="Excluir prédio" (click)="openDeletarPredioModal(predio)">
