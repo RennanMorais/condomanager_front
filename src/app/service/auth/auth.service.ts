@@ -1,3 +1,4 @@
+import { CodigoVerificaRequest } from '../../model/request/CodigoVerificacaoRequest';
 import jwt_decode from 'jwt-decode';
 
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +7,8 @@ import { Observable } from 'rxjs';
 import { Auth } from 'src/app/model/Auth';
 import { UserLogin } from 'src/app/model/Login';
 import { Router } from '@angular/router';
+import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
+import { RedefinicaoSenhaRequest } from 'src/app/model/request/RedefinicaoSenhaRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +24,18 @@ export class AuthService {
 
   fazerLogin(login: UserLogin): Observable<Auth> {
     return this.httpClient.post<Auth>('/api/condomanager/sistema/login', login);
+  }
+
+  gerarCodVerificacao(req: CodigoVerificaRequest):  Observable<ResponseMensagem>{
+    return this.httpClient.post<ResponseMensagem>('/api/condomanager/sistema/login/recuperar/senha', req);
+  }
+
+  validarCodigoVerificacao(req: CodigoVerificaRequest):  Observable<ResponseMensagem>{
+    return this.httpClient.post<ResponseMensagem>('/api/condomanager/sistema/login/recuperar/validar/codigo', req);
+  }
+
+  redefinirSenha(req: RedefinicaoSenhaRequest):  Observable<ResponseMensagem>{
+    return this.httpClient.post<ResponseMensagem>('/api/condomanager/sistema/login/redefinir/senha', req);
   }
 
   autenticar() {

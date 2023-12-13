@@ -2,52 +2,61 @@
 <div class="back">
   <div class="container-fluid pt-3">
 
-    <mat-form-field class="me-3">
-      <mat-label>Condomínios</mat-label>
-      <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
-        <mat-option *ngFor="let cond of condominios" [value]="cond.id">
-          {{ cond.nome }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="condominios.length != 0">
+      <mat-form-field class="me-3">
+        <mat-label>Condomínios</mat-label>
+        <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
+          <mat-option *ngFor="let cond of condominios" [value]="cond.id">
+            {{ cond.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="openCadastrarPredioModal()">Cadastrar Prédio</button>
+      <button mat-raised-button color="primary" (click)="openCadastrarPredioModal()">Cadastrar Prédio</button>
 
-    <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
-      <h6>Lista de prédios vazia, selecione um condomínio</h6>
+      <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
+        <h6>Lista de prédios vazia, selecione um condomínio</h6>
+      </div>
+
+      <!-- Yable condominios -->
+      <mat-table [dataSource]="predios" *ngIf="predios.length != 0">
+
+        <!-- condominio Column -->
+        <ng-container matColumnDef="bloco">
+          <mat-header-cell *matHeaderCellDef>Bloco/Prédio</mat-header-cell>
+          <mat-cell *matCellDef="let predio">{{ predio.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- cnpj Column -->
+        <ng-container matColumnDef="condominio">
+          <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
+          <mat-cell *matCellDef="let predio">{{ predio.condominio.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef class="action-column-header">Ações</mat-header-cell>
+          <mat-cell *matCellDef="let predio" class="action-column">
+            <button mat-icon-button color="primary" aria-label="Editar prédio" (click)="openEditarPredioModal(predio)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Excluir prédio" (click)="openDeletarPredioModal(predio)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
     </div>
 
-    <!-- Yable condominios -->
-    <mat-table [dataSource]="predios" *ngIf="predios.length != 0">
 
-      <!-- condominio Column -->
-      <ng-container matColumnDef="bloco">
-        <mat-header-cell *matHeaderCellDef>Bloco/Prédio</mat-header-cell>
-        <mat-cell *matCellDef="let predio">{{ predio.nome }}</mat-cell>
-      </ng-container>
-
-      <!-- cnpj Column -->
-      <ng-container matColumnDef="condominio">
-        <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
-        <mat-cell *matCellDef="let predio">{{ predio.condominio.nome }}</mat-cell>
-      </ng-container>
-
-      <!-- Ações Column -->
-      <ng-container matColumnDef="acoes">
-        <mat-header-cell *matHeaderCellDef class="action-column-header">Ações</mat-header-cell>
-        <mat-cell *matCellDef="let predio" class="action-column">
-          <button mat-icon-button color="primary" aria-label="Editar prédio" (click)="openEditarPredioModal(predio)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" aria-label="Excluir prédio" (click)="openDeletarPredioModal(predio)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-center mt-5"  *ngIf="condominios.length == 0">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
 
   </div>
 </div>

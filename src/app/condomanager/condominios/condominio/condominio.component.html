@@ -2,73 +2,80 @@
 <div class="back">
   <div class="container-fluid pt-3">
 
-    <button mat-raised-button color="primary" class="mb-3" (click)="openCadCondominioModal()">Cadastrar Condomínio</button>
 
-    <div class="d-flex justify-content-center" *ngIf="condominios.length == 0">
-      <mat-spinner></mat-spinner>
+
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-center mt-5"  *ngIf="condominios.length == 0">
+        <mat-spinner></mat-spinner>
+      </div>
     </div>
 
-    <!-- Yable condominios -->
-    <mat-table [dataSource]="condominios" class="mat-table" *ngIf="condominios.length != 0">
+    <div *ngIf="condominios.length != 0">
 
-      <!-- condominio Column -->
-      <ng-container matColumnDef="condominio">
-        <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.nome }}</mat-cell>
-      </ng-container>
+      <button mat-raised-button color="primary" class="mb-3" (click)="openCadCondominioModal()">Cadastrar Condomínio</button>
 
-      <!-- cnpj Column -->
-      <ng-container matColumnDef="cnpj">
-        <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.cnpj }}</mat-cell>
-      </ng-container>
+       <!-- Yable condominios -->
+      <mat-table [dataSource]="condominios" class="mat-table" *ngIf="condominios.length != 0">
 
-       <!-- email Column -->
-       <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.email }}</mat-cell>
-      </ng-container>
+        <!-- condominio Column -->
+        <ng-container matColumnDef="condominio">
+          <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.nome }}</mat-cell>
+        </ng-container>
 
-      <!-- endereco Column -->
-      <ng-container matColumnDef="endereco">
-        <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.endereco.endereco }}</mat-cell>
-      </ng-container>
+        <!-- cnpj Column -->
+        <ng-container matColumnDef="cnpj">
+          <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.cnpj }}</mat-cell>
+        </ng-container>
 
-      <!-- numero Column -->
-      <ng-container matColumnDef="numero">
-        <mat-header-cell *matHeaderCellDef>Número</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.endereco.numero }}</mat-cell>
-      </ng-container>
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.email }}</mat-cell>
+        </ng-container>
 
-      <!-- cidade Column -->
-      <ng-container matColumnDef="cidade">
-        <mat-header-cell *matHeaderCellDef>Cidade</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.endereco.cidade.nome }}</mat-cell>
-      </ng-container>
+        <!-- endereco Column -->
+        <ng-container matColumnDef="endereco">
+          <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.endereco }}</mat-cell>
+        </ng-container>
 
-      <!-- estado Column -->
-      <ng-container matColumnDef="estado">
-        <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
-        <mat-cell *matCellDef="let cond">{{ cond.endereco.estado.nome }}</mat-cell>
-      </ng-container>
+        <!-- numero Column -->
+        <ng-container matColumnDef="numero">
+          <mat-header-cell *matHeaderCellDef>Número</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.numero }}</mat-cell>
+        </ng-container>
 
-      <!-- Ações Column -->
-      <ng-container matColumnDef="acoes">
-        <mat-header-cell *matHeaderCellDef="" class="action-column-header">Ações</mat-header-cell>
-        <mat-cell *matCellDef="let course" class="action-column">
-          <button mat-icon-button color="primary" aria-label="Editar curso">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" aria-label="Excluir curso">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+        <!-- cidade Column -->
+        <ng-container matColumnDef="cidade">
+          <mat-header-cell *matHeaderCellDef>Cidade</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.cidade.nome }}</mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
+        <!-- estado Column -->
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.estado.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef="" class="action-column-header">Ações</mat-header-cell>
+          <mat-cell *matCellDef="let course" class="action-column">
+            <button mat-icon-button color="primary" aria-label="Editar curso">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Excluir curso">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
 
   </div>
 </div>
