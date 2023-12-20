@@ -1,6 +1,6 @@
 import { ResponseMensagem } from './../../../model/response/ResponseMensagem';
 import { Condominio } from './../../../model/Condominio';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Predio } from 'src/app/model/Predio';
 import { CondominioService } from 'src/app/service/condominios/condominio.service';
@@ -28,6 +28,8 @@ export class PredioComponent {
   public predio: PredioRequest = new PredioRequest();
   public condominio: Condominio = new Condominio();
   public respostaSucesso: ResponseMensagem = new ResponseMensagem();
+  public responsemensagemErro: ResponseMensagem = new ResponseMensagem();
+
   readonly displayedColumns: string[] = ['bloco', 'condominio', 'acoes'];
 
   constructor(
@@ -40,6 +42,8 @@ export class PredioComponent {
 
   ngOnInit(): void {
     this.carregarCondominios();
+    var id: any = localStorage.getItem('condp');
+    this.carregarPrediosPorCondominio(id);
   }
 
   carregarCondominios() {
@@ -49,23 +53,35 @@ export class PredioComponent {
       },
       (httpError) => {
         console.log(httpError.error.mensagem);
+        this.responsemensagemErro = httpError.error;
       }
     );
   }
 
   carregarPrediosPorCondominio(id: number) {
-    if(id != 0) {
-      this.condominioService.getPrediosPorCondominio(id).subscribe(
-        (res) => {
-          this.predios = res;
-        },
-        (httpError) => {
-          alert(httpError.error.mensagem);
-        }
-      );
-    } else {
-      this.predios = [];
-    }
+    // if(this.condominioPrincipal.id != 0) {
+    //   this.condominioService.getPrediosPorCondominio(id).subscribe(
+    //     (res) => {
+    //       this.predios = res;
+    //     },
+    //     (httpError) => {
+    //       console.log(httpError.error.mensagem);
+    //       window.location.reload();
+    //     }
+    //   );
+    // } else {
+    //   this.predios = [];
+    // }
+
+    this.condominioService.getPrediosPorCondominio(id).subscribe(
+      (res) => {
+        this.predios = res;
+      },
+      (httpError) => {
+        console.log(httpError.error.mensagem);
+        window.location.reload();
+      }
+    );
   }
 
   carregarPredio(id: number) {
@@ -74,6 +90,10 @@ export class PredioComponent {
         (res) => {
           this.predio.idCondominio = res.condominio?.id;
           this.predio.nome = res.nome;
+        },
+        (httpError) => {
+          console.log(httpError.error);
+          window.location.reload();
         }
       )
     }
@@ -137,7 +157,8 @@ export class DeletarPredioDialog {
         window.location.reload();
       },
       (httpError) => {
-        alert(httpError);
+        console.log(httpError);
+        window.location.reload();
       }
     );
   }
@@ -188,6 +209,7 @@ export class CadastrarPredioDialog {
       },
       (httpError) => {
         console.log(httpError.error.mensagem);
+        window.location.reload();
       }
     );
   }
@@ -198,7 +220,8 @@ export class CadastrarPredioDialog {
         window.location.reload();
       },
       (httpError) => {
-        alert(httpError.error.mensagem);
+        console.log(httpError.error.mensagem);
+        window.location.reload();
       }
     );
   }
@@ -224,6 +247,7 @@ export class CadastrarPredioDialog {
     MatProgressBarModule
   ]
 })
+
 export class EditarPredioDialog {
 
   public request: PredioRequest = new PredioRequest();
@@ -243,7 +267,6 @@ export class EditarPredioDialog {
     this.carregarCondominios();
     this.request.idCondominio = this.data.condominio?.id;
     this.request.nome = this.data.nome;
-    console.log(this.predio);
   }
 
   carregarCondominios() {
@@ -253,6 +276,7 @@ export class EditarPredioDialog {
       },
       (httpError) => {
         console.log(httpError.error.mensagem);
+        window.location.reload();
       }
     );
   }
@@ -263,7 +287,8 @@ export class EditarPredioDialog {
         this.respostaSucesso = res;
       },
       (httpError) => {
-        alert(httpError.error.mensagem);
+        console.log(httpError.error.mensagem);
+        window.location.reload();
       }
     );
   }

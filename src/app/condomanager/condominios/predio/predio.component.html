@@ -3,16 +3,8 @@
   <div class="container-fluid pt-3">
 
     <div *ngIf="condominios.length != 0">
-      <mat-form-field class="me-3">
-        <mat-label>Condomínios</mat-label>
-        <mat-select (selectionChange)="carregarPrediosPorCondominio($any($event).value)">
-          <mat-option *ngFor="let cond of condominios" [value]="cond.id">
-            {{ cond.nome }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="openCadastrarPredioModal()">Cadastrar Prédio</button>
+      <button mat-raised-button color="primary" class="mb-3" (click)="openCadastrarPredioModal()" >Cadastrar Prédio</button>
 
       <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="predios.length == 0">
         <h6>Lista de prédios vazia, selecione um condomínio</h6>
@@ -53,9 +45,13 @@
 
 
     <div class="container">
-      <div class="d-flex align-items-center justify-content-center mt-5"  *ngIf="condominios.length == 0">
+      <div class="d-flex align-items-center justify-content-center mt-5"  *ngIf="condominios.length == 0 && responsemensagemErro.mensagem == ''">
         <mat-spinner></mat-spinner>
       </div>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="condominios.length == 0">
+      <h6>{{responsemensagemErro.mensagem}}</h6>
     </div>
 
   </div>

@@ -21,11 +21,24 @@ export class CondominioService {
   constructor(private http: HttpClient) { }
 
   //Condominios
+  public adicionarCondominio(cond: Partial<CondominioRequest>): Observable<ResponseMensagem> {
+    return this.http.post<ResponseMensagem>(this.host + '/condominio/cadastrar', cond, { headers: this.headers});
+  }
+
+  public editarCondominio(idCondominio: number, cond: Partial<CondominioRequest>): Observable<ResponseMensagem> {
+    return this.http.put<ResponseMensagem>(this.host + '/condominio/editar/' + idCondominio, cond, { headers: this.headers});
+  }
+
   public getCondominios(): Observable<Condominio[]> {
-    return this.http.get<Condominio[]>(this.host + '/condominio', { headers: this.headers })
-    .pipe(
-      delay(1000)
-    );
+    return this.http.get<Condominio[]>(this.host + '/condominio', { headers: this.headers });
+  }
+
+  public getCondominiPrincipal(): Observable<Condominio> {
+    return this.http.get<Condominio>(this.host + '/condominio/principal', { headers: this.headers });
+  }
+
+  public alteraCondominioPrincipal(id: number): Observable<ResponseMensagem> {
+    return this.http.put<ResponseMensagem>(this.host + '/condominio/principal/alterar/' + id, undefined, { headers: this.headers });
   }
 
   //Predios
@@ -42,10 +55,6 @@ export class CondominioService {
     return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
   }
 
-  public adicionarCondominio(cond: Partial<CondominioRequest>): Observable<ResponseMensagem> {
-    return this.http.post<ResponseMensagem>(this.host + '/condominio/cadastrar', cond, { headers: this.headers});
-  }
-
   public adicionarPredio(predio: Partial<PredioRequest>): Observable<ResponseMensagem> {
     return this.http.post<ResponseMensagem>(this.host + '/predio/cadastrar/', predio, { headers: this.headers});
   }
@@ -54,8 +63,8 @@ export class CondominioService {
     return this.http.put<ResponseMensagem>(this.host + '/predio/editar/' + idPredio, predio, { headers: this.headers});
   }
 
-  public deletarCondominio(condominio: Condominio): Observable<ResponseMensagem> {
-    return this.http.delete<ResponseMensagem>(this.host + '/condominio/deletar/' + condominio.id, { headers: this.headers });
+  public deletarCondominio(id: number): Observable<ResponseMensagem> {
+    return this.http.delete<ResponseMensagem>(this.host + '/condominio/deletar/' + id, { headers: this.headers });
   }
 
   public deletarPredio(predio: Predio): Observable<ResponseMensagem> {

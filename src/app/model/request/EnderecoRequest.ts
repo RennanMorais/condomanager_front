@@ -4,6 +4,6 @@ export class EnderecoRequest {
   numero!: string;
   complemento!: string;
   bairro!: string;
-  idEstado!: number;
-  idCidade!: number;
+  idEstado!: number | undefined;
+  idCidade!: number | undefined;
 }
