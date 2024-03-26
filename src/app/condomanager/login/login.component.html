@@ -6,6 +6,12 @@
       </strong>
     </div>
 
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="responseHttpErrors.length != 0">
+      <strong *ngFor="let erro of responseHttpErrors">
+        <p>{{erro.mensagem}}</p>
+      </strong>
+    </div>
+
     <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="codigoacessoResponse.mensagem != undefined">
       <strong>
         <p>{{codigoacessoResponse.mensagem}}</p>

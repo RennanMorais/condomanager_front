@@ -1,0 +1,26 @@
+<app-menu></app-menu>
+<mat-accordion>
+
+  <mat-expansion-panel hideToggle *ngFor="let predio of predios">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ predio.nome }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ predio.condominio?.nome }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-expansion-panel hideToggle *ngFor="let pav of predio.pavimentos">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Pavimento {{ pav.pavimento }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let ap of pav.apartamentos">
+        Apto <p>{{ ap.numero }}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-expansion-panel>
+
+</mat-accordion>

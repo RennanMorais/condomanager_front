@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CadastroCondominioDialog, CondominioComponent } from './condomanager/condominios/condominio/condominio.component';
+import { CondominioComponent } from './condomanager/condominios/condominio/condominio.component';
 import { DashboardComponent } from './condomanager/condominios/dashboard/dashboard.component';
 import { MenuComponent } from './condomanager/menu/menu.component';
 import { LoginComponent } from './condomanager/login/login.component';
@@ -25,6 +25,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ApartamentosComponent } from './condomanager/condominios/apartamentos/apartamentos.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     DashboardComponent,
     MenuComponent,
     LoginComponent,
-    PredioComponent
+    PredioComponent,
+    ApartamentosComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule
   ],
   providers: [
     AuthService,

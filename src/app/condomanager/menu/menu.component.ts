@@ -47,6 +47,7 @@ export class MenuComponent {
         this.condominio = response;
         var id: any = response.id;
         localStorage.setItem('condp', id);
+        console.log(localStorage);
       },
       (httpError) => {
         console.log(httpError.error);

@@ -45,6 +45,8 @@ export class LoginComponent {
     if(this.authService.autenticar()) {
       this.router.navigate(['condomanager/sistema']);
     }
+    console.log("INICIOU");
+    console.log(this.responseHttpErrors);
   }
 
   onLogin() {
@@ -59,6 +61,7 @@ export class LoginComponent {
         var responseHttpErro: ResponseMensagem = new ResponseMensagem();
         if(Array.isArray(httpError.error.erros)) {
           this.responseHttpErrors = httpError.error.erros;
+          console.log(this.responseHttpErrors);
         } else {
           responseHttpErro.mensagem = httpError.error.mensagem;
           if(httpError.error.mensagem == null) {
