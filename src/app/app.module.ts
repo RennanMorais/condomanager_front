@@ -27,6 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ApartamentosComponent } from './condomanager/condominios/apartamentos/apartamentos.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatMenuModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule,
+    MatSlideToggleModule
   ],
   providers: [
     AuthService,

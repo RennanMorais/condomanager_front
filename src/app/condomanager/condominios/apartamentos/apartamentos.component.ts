@@ -9,7 +9,9 @@ import { Predio } from 'src/app/model/Predio';
   styleUrls: ['./apartamentos.component.css']
 })
 export class ApartamentosComponent {
+
   predios: Predio[] = [];
+  checked: boolean = false;
 
   constructor(
     private condominioService: CondominioService,
