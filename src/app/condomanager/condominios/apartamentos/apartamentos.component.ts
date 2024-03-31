@@ -1,6 +1,8 @@
 import { CondominioService } from './../../../service/condominios/condominio.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Apartamento } from 'src/app/model/Apartamento';
+import { DisponibilidadeAluguel } from 'src/app/model/DisponibilidadeAluguelRequest';
 import { Predio } from 'src/app/model/Predio';
 
 @Component({
@@ -11,7 +13,7 @@ import { Predio } from 'src/app/model/Predio';
 export class ApartamentosComponent {
 
   predios: Predio[] = [];
-  checked: boolean = false;
+  disponibilidadeAluguelRequest: DisponibilidadeAluguel = new DisponibilidadeAluguel;
 
   constructor(
     private condominioService: CondominioService,
@@ -37,4 +39,25 @@ export class ApartamentosComponent {
       }
     );
   }
+
+  alterarDisponibilidadeAluguel(apto: Apartamento) {
+
+    this.disponibilidadeAluguelRequest.idApartamento = apto.id;
+
+    if(apto.dispAluguel) {
+      this.disponibilidadeAluguelRequest.dispAluguel = false;
+    } else {
+      this.disponibilidadeAluguelRequest.dispAluguel = true;
+    }
+
+    this.condominioService.alterarDisponibilidadeAluguel(this.disponibilidadeAluguelRequest).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (httpError) => {
+        console.log(httpError.error.mensagem);
+      }
+    );
+  }
+
 }

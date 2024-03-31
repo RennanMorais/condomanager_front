@@ -6,6 +6,7 @@ import { Predio } from 'src/app/model/Predio';
 import { ResponseMensagem } from 'src/app/model/response/ResponseMensagem';
 import { PredioRequest } from 'src/app/model/request/PredioRequest';
 import { CondominioRequest } from 'src/app/model/request/CondominioRequest';
+import { DisponibilidadeAluguel } from 'src/app/model/DisponibilidadeAluguelRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class CondominioService {
     return this.http.get<Condominio>(this.host + '/condominio/principal', { headers: this.headers });
   }
 
+  public deletarCondominio(id: number): Observable<ResponseMensagem> {
+    return this.http.delete<ResponseMensagem>(this.host + '/condominio/deletar/' + id, { headers: this.headers });
+  }
+
   public alteraCondominioPrincipal(id: number): Observable<ResponseMensagem> {
     return this.http.put<ResponseMensagem>(this.host + '/condominio/principal/alterar/' + id, undefined, { headers: this.headers });
   }
@@ -50,7 +55,6 @@ export class CondominioService {
     return this.http.get<Predio>(this.host + '/predios/buscar/' + id, { headers: this.headers });
   }
 
-  //Predios por condominio
   public getPrediosPorCondominio(id: number): Observable<Predio[]> {
     return this.http.get<Predio[]>(this.host + '/predios/condominio/' + id, { headers: this.headers });
   }
@@ -63,12 +67,13 @@ export class CondominioService {
     return this.http.put<ResponseMensagem>(this.host + '/predio/editar/' + idPredio, predio, { headers: this.headers});
   }
 
-  public deletarCondominio(id: number): Observable<ResponseMensagem> {
-    return this.http.delete<ResponseMensagem>(this.host + '/condominio/deletar/' + id, { headers: this.headers });
-  }
-
   public deletarPredio(predio: Predio): Observable<ResponseMensagem> {
     return this.http.delete<ResponseMensagem>(this.host + '/predio/deletar/' + predio.id, { headers: this.headers});
+  }
+
+  //Apartamentos
+  public alterarDisponibilidadeAluguel(dispAluguel: Partial<DisponibilidadeAluguel>): Observable<ResponseMensagem> {
+    return this.http.post<ResponseMensagem>(this.host + '/apartamento/aluguel', dispAluguel, { headers: this.headers});
   }
 
 }
