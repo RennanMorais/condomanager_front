@@ -1,0 +1,25 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '@angular/material/theming';
+
+@include mat-core();
+
+$custom-app-primary: mat-palette($mat-yellow, 500);
+$custom-aoo-secondary: mat-palette($mat-gray, 800);
+$custom-aoo-warn: mat-palette($mat-red, 400);
+
+$custom-theme: mat-dark-theme($custom-app-primary, $custom-aoo-secondary, $custom-aoo-warn);
+
+@include angular-material-theme($custom-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.app-background {
+  background: #303030;
+}
+
+.input-form-style {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}

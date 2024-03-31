@@ -1,63 +1,49 @@
-<nav class="navbar navbar-expand-lg menubar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Condomanager</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema')">DashBoard</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Condomínios
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/condominios')">Condomínios</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/predios')">Prédios</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/apartamentos')">Apartamentos</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/areas')">Área Comum</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/reservas')">Reservas</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/veiculos')">Veículos</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/assembleias')">Assembléias</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/moradores')">Moradores</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/ocorrencias')">Ocorrências</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/pets')">Pets</a></li>
-            <li><a class="dropdown-item" style="cursor: pointer;" (click)="redirecionadorMenu('condomanager/sistema/reservas')">Reservas</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Financeiro
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Contas a pagar</a></li>
-            <li><a class="dropdown-item" href="#">Constas a receber</a></li>
-            <li><a class="dropdown-item" href="#">Fornecedores</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Portaria
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Teste</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Configurações
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
-            <li><a class="dropdown-item" href="#">Usuários</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li style="cursor: pointer;" (click)="logout()">Sair</li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <span class="me-4">CondoManager</span>
+
+  <button mat-button (click)="redirecionadorMenu('condomanager/sistema')">DashBoard</button>
+
+  <button mat-button [matMenuTriggerFor]="menu1">Condomínios</button>
+  <mat-menu #menu1="matMenu">
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/condominios')">Condomínios</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/predios')">Blocos/Prédios</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/apartamentos')">Apartamentos</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/areas')">Área Comum</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/reservas')">Reservas</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/veiculos')">Veículos</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/assembleias')">Assembléias</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/moradores')">Moradores</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/ocorrencias')">Ocorrências</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema/pets')">Pets</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menu2">Financeiro</button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Contas a pagar</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Constas a receber</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Fornecedores</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menu3">Portaria</button>
+  <mat-menu #menu3="matMenu">
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Teste</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Teste</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menu3">Configurações</button>
+  <mat-menu #menu3="matMenu">
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Perfil</button>
+    <button mat-menu-item (click)="redirecionadorMenu('condomanager/sistema')">Usuários</button>
+  </mat-menu>
+
+  <button mat-icon-button color="accent" (click)="logout()" aria-label="Example icon button with a heart icon">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+  <b>{{ condominio.nome }}</b>
+  <button mat-icon-button color="accent"(click)="openTrocarCondModal()" aria-label="Example icon button with a heart icon">
+    <mat-icon>edit</mat-icon>
+  </button>
+
+</mat-toolbar>

@@ -1,7 +1,7 @@
 import { Cidade } from './../../model/Cidade';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { Estado } from 'src/app/model/Estado';
 
 @Injectable({

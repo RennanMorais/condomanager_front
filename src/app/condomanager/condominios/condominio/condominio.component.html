@@ -1,113 +1,83 @@
 <app-menu></app-menu>
 <div class="back">
-  <div class="container">
-    <button class="btn btn-warning mt-5 mb-2" data-bs-toggle="modal" data-bs-target="#cadCondModal">
-      Cadastrar Condomínio
-    </button>
+  <div class="container-fluid pt-3">
 
-    <!-- Modal Cadastrar condominio -->
-    <div class="modal fade" id="cadCondModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Condomínio</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="post">
-              <div class="mb-3">
-                <label class="form-label">Nome do Condomínio</label>
-                <input type="text" required="required" class="form-control" name="nome" [(ngModel)]="condominio.nome">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">CNPJ</label>
-                <input type="text" required="required" class="form-control" name="cnpj" [(ngModel)]="condominio.cnpj">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">E-mail</label>
-                <input type="email" required="required" class="form-control" name="email" [(ngModel)]="condominio.email">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Endereço</label>
-                <input type="text" required="required" class="form-control" name="endereco" [(ngModel)]="condominio.endereco.endereco">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Número</label>
-                <input type="text" required="required" class="form-control" name="numero" [(ngModel)]="condominio.endereco.numero">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Complemento</label>
-                <input type="text" required="required" class="form-control" name="complemento" [(ngModel)]="condominio.endereco.complemento">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Bairro</label>
-                <input type="text" required="required" class="form-control" name="bairro" [(ngModel)]="condominio.endereco.bairro">
-              </div>
-
-              <div class="mb-3">
-                <label for="cond-field" class="form-label">Estado</label>
-                <select class="form-select" (change)="carregarCidadePorEstado($any($event.target).value)" name="estado" [(ngModel)]="condominio.endereco.idEstado">
-                  <option value="">Selecionar...</option>
-                  <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}</option>
-                </select>
-              </div>
-
-              <div class="mb-3">
-                <label for="cond-field" class="form-label">Cidade</label>
-                <select class="form-select" name="cidade" [(ngModel)]="condominio.endereco.idCidade">
-                  <option value="">Selecionar...</option>
-                  <option *ngFor="let cidade of cidades" [value]="cidade.id">{{cidade.nome}}</option>
-                </select>
-              </div>
-
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-outline-warning" (click)="cadastrarCondominio()">Cadastrar</button>
-          </div>
-        </div>
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-center mt-5"  *ngIf="condominios.length == 0 && responsemensagemErro.mensagem == ''">
+        <mat-spinner></mat-spinner>
       </div>
     </div>
 
-    <div class="d-flex justify-content-center" *ngIf="condominios.length == 0">
-      <div class="spinner-border text-warning" role="status">
-        <span class="visually-hidden"></span>
-      </div>
+    <button mat-raised-button color="primary" class="mb-3" (click)="openCadCondominioModal()">Cadastrar Condomínio</button>
+
+    <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" *ngIf="condominios.length == 0">
+      <h6>{{responsemensagemErro.mensagem}}</h6>
     </div>
 
-    <table class="table table-light table-hover" *ngIf="condominios.length != 0">
-      <thead>
-        <tr>
-          <th scope="col">Condomínio</th>
-          <th scope="col">CNPJ</th>
-          <th scope="col">E-mail</th>
-          <th scope="col">Endereço</th>
-          <th scope="col">Numero</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cond of condominios">
-          <td>{{cond.nome}}</td>
-          <td>{{cond.cnpj}}</td>
-          <td>{{cond.email}}</td>
-          <td>{{cond.endereco.endereco}}</td>
-          <td>{{cond.endereco.numero}}</td>
-          <td>{{cond.endereco.cidade.nome}}</td>
-          <td>{{cond.endereco.estado.nome}}</td>
-          <td>
-            <button class="btn btn-primary me-2">Editar</button>
-            <button class="btn btn-danger">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div *ngIf="condominios.length != 0">
+
+       <!-- Yable condominios -->
+      <mat-table [dataSource]="condominios" class="mat-table" *ngIf="condominios.length != 0">
+
+        <!-- condominio Column -->
+        <ng-container matColumnDef="condominio">
+          <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- cnpj Column -->
+        <ng-container matColumnDef="cnpj">
+          <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.cnpj }}</mat-cell>
+        </ng-container>
+
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.email }}</mat-cell>
+        </ng-container>
+
+        <!-- endereco Column -->
+        <ng-container matColumnDef="endereco">
+          <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.endereco }}</mat-cell>
+        </ng-container>
+
+        <!-- numero Column -->
+        <ng-container matColumnDef="numero">
+          <mat-header-cell *matHeaderCellDef>Número</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.numero }}</mat-cell>
+        </ng-container>
+
+        <!-- cidade Column -->
+        <ng-container matColumnDef="cidade">
+          <mat-header-cell *matHeaderCellDef>Cidade</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.cidade.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- estado Column -->
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+          <mat-cell *matCellDef="let cond">{{ cond.endereco.estado.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef="" class="action-column-header">Ações</mat-header-cell>
+          <mat-cell class="action-column" *matCellDef="let cond">
+            <button mat-icon-button color="primary" aria-label="Editar curso" (click)="openEditarCondominioModal(cond)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" aria-label="Excluir curso" (click)="openDeletarCondominioModal(cond)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+
   </div>
 </div>

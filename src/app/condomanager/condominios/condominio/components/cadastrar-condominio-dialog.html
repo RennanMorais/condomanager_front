@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Cadastrar Condomínío</h1>
+<div class="container" style="width: 500px;">
+  <form method="post">
+
+    <mat-form-field class="input-form-style">
+      <mat-label>Nome do Condomínio</mat-label>
+      <input matInput type="text" required="required" name="nome" [(ngModel)]="request.nome">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">CNPJ</mat-label>
+      <input matInput type="text" required="required" name="cnpj" [(ngModel)]="request.cnpj">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">E-mail</mat-label>
+      <input matInput type="email" required="required" name="email" [(ngModel)]="request.email">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">Endereço</mat-label>
+      <input matInput type="text" required="required" name="endereco" [(ngModel)]="request.endereco.endereco">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">Número</mat-label>
+      <input matInput type="text" required="required" name="numero" [(ngModel)]="request.endereco.numero">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">Complemento</mat-label>
+      <input matInput type="text" name="complemento" [(ngModel)]="request.endereco.complemento">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">Bairro</mat-label>
+      <input matInput type="text" required="required" name="bairro" [(ngModel)]="request.endereco.bairro">
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label class="form-label">Estado</mat-label>
+      <mat-select (selectionChange)="carregarCidadePorEstado($any($event).value)" name="idEstado" [(ngModel)]="request.endereco.idEstado">
+        <mat-option *ngFor="let estado of estados" [value]="estado.id">
+          {{ estado.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label>Cidade</mat-label>
+      <mat-select name="idCidade" [(ngModel)]="request.endereco.idCidade">
+        <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+          {{ cidade.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" data-bs-dismiss="modal" mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+  <button type="button" (click)="cadastrarCondominio()" mat-raised-button color="primary">Cadastrar</button>
+</div>

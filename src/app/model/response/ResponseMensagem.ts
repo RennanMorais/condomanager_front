@@ -1,4 +1,4 @@
 export class ResponseMensagem {
-  codigo: String | undefined;
-  mensagem: String | undefined;
+  codigo!: String;
+  mensagem!: String;
 }

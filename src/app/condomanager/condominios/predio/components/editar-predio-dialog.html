@@ -1,0 +1,38 @@
+<div *ngIf="condominios.length != 0">
+  <h1 mat-dialog-title>Editar Bloco/Prédio</h1>
+
+  <div class="container" style="width: 500px;">
+
+    <div *ngIf="respostaSucesso.mensagem != undefined">
+      <div class="alert alert-success">
+        {{ respostaSucesso.mensagem }}
+      </div>
+    </div>
+
+    <form method="post">
+
+      <mat-form-field class="input-form-style">
+        <mat-label>Condomínio</mat-label>
+        <mat-select name="idCondominio" [(ngModel)]="request.idCondominio">
+          <mat-option *ngFor="let condom of condominios" [value]="condom.id">
+            {{ condom.nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="input-form-style">
+        <mat-label>Bloco/Prédio</mat-label>
+        <input matInput type="text" required="required" name="nome" [(ngModel)]="request.nome">
+      </mat-form-field>
+
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button type="button" mat-raised-button color="warn" (click)="closeDeleteModal()">Fechar</button>
+    <button type="button" mat-raised-button color="primary" (click)="editarPredio(predio.id!)">Salvar</button>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="condominios.length == 0" style="width: 500px; height: 265px;" class="d-flex align-items-center justify-content-center">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>

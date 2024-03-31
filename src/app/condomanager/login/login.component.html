@@ -1,29 +1,80 @@
-<div class="login-container">
+<div class="login-container" color="secondary">
   <div>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="responseHttpErrors.length > 0">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="responseHttpErro.mensagem != undefined">
       <strong>
-        <p *ngFor="let e of responseHttpErrors">{{e.mensagem}}</p>
+        <p>{{responseHttpErro.mensagem}}</p>
       </strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="responseHttpErrors.length != 0">
+      <strong *ngFor="let erro of responseHttpErrors">
+        <p>{{erro.mensagem}}</p>
+      </strong>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="codigoacessoResponse.mensagem != undefined">
+      <strong>
+        <p>{{codigoacessoResponse.mensagem}}</p>
+      </strong>
+    </div>
+
     <div class="login">
         <div class="logo-box">
           <h2>CONDOMANAGER</h2>
         </div>
         <div class="login-box">
           <form method="post">
-            <div class="mb-3">
-              <label for="email-field" class="form-label">Email</label>
-              <input type="email" required="required" class="form-control" id="email-field" aria-describedby="emailHelp" name="email" [(ngModel)]="login.email">
+
+            <!--Formulario de login-->
+            <div class="login-fields" *ngIf="!fieldRecuperaSenha && !botaoRedefinirSenha">
+              <mat-form-field class="input-form-style">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="email" required="required" name="email" [(ngModel)]="login.email">
+              </mat-form-field>
+
+              <mat-form-field class="input-form-style">
+                <mat-label>Senha</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" required name="senha" [(ngModel)]="login.password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
             </div>
-            <div class="mb-3">
-              <label for="senha-field" class="form-label">Senha</label>
-              <input type="password" required="required" class="form-control" id="senha-field" name="password" [(ngModel)]="login.password">
+
+            <!--Formulario de validar codigo de verificacao-->
+            <div class="forgot-fields" *ngIf="fieldRecuperaSenha == true">
+              <mat-form-field class="input-form-style">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="email" required="required" name="email" [(ngModel)]="codigoAcessoReq.email">
+              </mat-form-field>
             </div>
-            <div class="mb-3">
-              <p><a class="forgot-text" href="">Esqueci a senha</a></p>
+
+            <div class="forgot-fields" *ngIf="fieldCodAcesso && fieldRecuperaSenha">
+              <mat-form-field class="input-form-style">
+                <mat-label>Código de verificação</mat-label>
+                <input matInput type="text" name="codigo" [(ngModel)]="codigoAcessoReq.codigo">
+              </mat-form-field>
             </div>
-            <button type="submit" class="btn btn-dark" (click)="onLogin()">Login</button>
+
+            <!--Formulario de redefinicao de senha-->
+            <mat-form-field class="input-form-style" *ngIf="!fieldRecuperaSenha && !botaovalidar && botaoRedefinirSenha">
+              <mat-label>Defina sua nova senha</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" required name="novaSenha" [(ngModel)]="redefinicaoSenhaReq.novaSenha">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <div class="mb-3" *ngIf="!fieldRecuperaSenha && !botaoRedefinirSenha">
+              <p><a class="forgot-text" style="cursor: pointer;" (click)="LigaDesligaCamposRecuperaSenha()">Esqueci a senha</a></p>
+            </div>
+
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark me-2" (click)="LigaDesligaCamposRecuperaSenha()" *ngIf="fieldRecuperaSenha">Voltar</button>
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark me-2" (click)="gerarCodigoVerificacao()" *ngIf="fieldRecuperaSenha && !botaovalidar">Enviar</button>
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark me-2" (click)="validarCodigoVerificacao()" *ngIf="fieldRecuperaSenha && botaovalidar">Validar</button>
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark me-2" (click)="redefinirSenhaUsuario()" *ngIf="!fieldRecuperaSenha && !botaovalidar && botaoRedefinirSenha">Redefinir Senha</button>
+
+            <button type="submit" mat-raised-button type="submit" class="btn btn-dark" (click)="onLogin()" *ngIf="!fieldRecuperaSenha && !botaoRedefinirSenha">Login</button>
           </form>
         </div>
     </div>

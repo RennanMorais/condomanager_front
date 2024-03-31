@@ -1,5 +1,5 @@
 export class Estado {
-  id: number | undefined;
+  id!: number;
   nome: string | undefined;
   uf: string | undefined;
 }

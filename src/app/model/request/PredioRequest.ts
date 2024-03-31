@@ -1,4 +1,4 @@
-export interface PredioRequest {
-  nome: string;
-  idCondominio: number;
+export class PredioRequest {
+  nome?: string;
+  idCondominio?: number;
 }

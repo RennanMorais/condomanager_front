@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Trocar Condomínio</h1>
+<div class="container" style="width: 500px;">
+  <form method="post">
+    <mat-form-field class="input-form-style">
+      <mat-label>Condomínio</mat-label>
+      <mat-select name="idCondominio" [(ngModel)]="idCond">
+        <mat-option *ngFor="let condom of condominios" [value]="condom.id">
+          {{ condom.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" mat-raised-button color="warn" mat-dialog-close (click)="closeTrocarModal()">Fechar</button>
+  <button type="button" mat-raised-button color="primary" (click)="trocarCondominio()">Trocar</button>
+</div>

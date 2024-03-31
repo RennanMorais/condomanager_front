@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Cadastrar Prédio</h1>
+<div class="container" style="width: 500px;">
+  <form method="post">
+
+    <mat-form-field class="input-form-style">
+      <mat-label>Condomínio</mat-label>
+      <mat-select name="idCondominio" [(ngModel)]="predio.idCondominio">
+        <mat-option *ngFor="let condom of condominios" [value]="condom.id">
+          {{ condom.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-form-style">
+      <mat-label>Bloco/Prédio</mat-label>
+      <input matInput type="text" required="required" name="nome" [(ngModel)]="predio.nome">
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" mat-raised-button color="warn" mat-dialog-close>Fechar</button>
+  <button type="button" mat-raised-button color="primary" (click)="cadastrarPredio()">Cadastrar</button>
+</div>
