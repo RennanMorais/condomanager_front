@@ -52,6 +52,7 @@ export class ApartamentosComponent {
 
     this.condominioService.alterarDisponibilidadeAluguel(this.disponibilidadeAluguelRequest).subscribe(
       (res) => {
+        window.location.reload()
         console.log(res);
       },
       (httpError) => {

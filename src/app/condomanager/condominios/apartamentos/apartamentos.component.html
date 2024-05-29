@@ -28,7 +28,7 @@
               <mat-card-subtitle>{{ ap.numero }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions align="start">
-              <mat-slide-toggle [checked]="ap.dispAluguel" (click)="alterarDisponibilidadeAluguel(ap)">Alugado</mat-slide-toggle>
+              <mat-slide-toggle [checked]="ap.dispAluguel" (click)="alterarDisponibilidadeAluguel(ap)">{{ ap.dispAluguel ? 'Alugado!':'Disponivel para alugar' }}</mat-slide-toggle>
             </mat-card-actions>
           </mat-card>
 

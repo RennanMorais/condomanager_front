@@ -15,8 +15,6 @@ import { RedefinicaoSenhaRequest } from 'src/app/model/request/RedefinicaoSenhaR
 })
 export class AuthService {
 
-  segundosDataAtual: number = Math.floor(new Date().getTime() / 1000);
-
   constructor(
     private httpClient: HttpClient,
     private router: Router
@@ -39,12 +37,12 @@ export class AuthService {
   }
 
   autenticar() {
+    var segundosDataAtual: number = Math.floor(new Date().getTime() / 1000);
     var decodeToken = this.getDecodeToken(this.recuperarToken());
 
-    if(decodeToken.exp >= this.segundosDataAtual && decodeToken != '') {
+    if(decodeToken.exp >= segundosDataAtual) {
       return true;
     }
-
     return false;
   }
 

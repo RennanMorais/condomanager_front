@@ -19,6 +19,12 @@
           <mat-cell *matCellDef="let predio">{{ predio.nome }}</mat-cell>
         </ng-container>
 
+         <!-- condominio Column -->
+         <ng-container matColumnDef="Pavimentos">
+          <mat-header-cell *matHeaderCellDef>Pavimentos</mat-header-cell>
+          <mat-cell *matCellDef="let predio">{{ predio.pavimentos.length }}</mat-cell>
+        </ng-container>
+
         <!-- cnpj Column -->
         <ng-container matColumnDef="condominio">
           <mat-header-cell *matHeaderCellDef>Condomínio</mat-header-cell>

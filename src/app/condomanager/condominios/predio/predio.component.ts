@@ -30,7 +30,7 @@ export class PredioComponent {
   public respostaSucesso: ResponseMensagem = new ResponseMensagem();
   public responsemensagemErro: ResponseMensagem = new ResponseMensagem();
 
-  readonly displayedColumns: string[] = ['bloco', 'condominio', 'acoes'];
+  readonly displayedColumns: string[] = ['bloco', 'Pavimentos','condominio', 'acoes'];
 
   constructor(
     private condominioService: CondominioService,
